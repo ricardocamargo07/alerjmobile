@@ -6,78 +6,116 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers'])
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if (window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
-    if (window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
-  });
-})
-
-.config(function($stateProvider, $urlRouterProvider) {
-  $stateProvider
-
-  .state('app', {
-    url: "/app",
-    abstract: true,
-    templateUrl: "templates/menu.html",
-    controller: 'AppCtrl'
-  })
-
-  .state('app.search', {
-    url: "/search",
-    views: {
-      'menuContent': {
-        templateUrl: "templates/search.html"
-      }
-    }
-  })
-
-  .state('app.browse', {
-    url: "/browse",
-    views: {
-      'menuContent': {
-        templateUrl: "templates/browse.html"
-      }
-    }
-  })
-    .state('app.playlists', {
-      url: "/playlists",
-      views: {
-        'menuContent': {
-          templateUrl: "templates/playlists.html",
-          controller: 'PlaylistsCtrl'
-        }
-      }
+    .run(function($ionicPlatform) {
+        $ionicPlatform.ready(function() {
+            // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+            // for form inputs)
+            if (window.cordova && window.cordova.plugins.Keyboard) {
+                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+            }
+            if (window.StatusBar) {
+                // org.apache.cordova.statusbar required
+                StatusBar.styleDefault();
+            }
+        });
     })
 
-  .state('app.single', {
-    url: "/playlists/plenario",
-    views: {
-      'menuContent': {
-        templateUrl: "templates/plenario.html",
-        controller: 'PlaylistCtrl'
-      }
-    }
-  })
+    .config(function($stateProvider, $urlRouterProvider) {
+        $stateProvider
 
-  .state('app.single2', {
-    url: "/playlists/deputados",
-    views: {
-      'menuContent': {
-        templateUrl: "templates/deputados.html",
-        controller: 'PlaylistCtrl'
-      }
-    }
-  })
+            .state('app', {
+                url: "/app",
+                abstract: true,
+                templateUrl: "templates/menu.html",
+                controller: 'AppCtrl'
+            })
 
-  ;
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
-});
+            .state('app.search', {
+                url: "/search",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/search.html"
+                    }
+                }
+            })
+
+            .state('app.browse', {
+                url: "/browse",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/browse.html"
+                    }
+                }
+            })
+            .state('app.playlists', {
+                url: "/playlists",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/playlists.html",
+                        controller: 'PlaylistsCtrl'
+                    }
+                }
+            })
+
+            .state('app.single', {
+                url: "/playlists/plenario",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/pages/plenario.html",
+                        controller: 'PlaylistCtrl'
+                    }
+                }
+            })
+
+            .state('app.single2', {
+                url: "/playlists/deputados",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/pages/deputados.html",
+                        controller: 'PlaylistCtrl'
+                    }
+                }
+            })
+
+            .state('app.single3', {
+                url: "/playlists/noticias",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/pages/noticias.html",
+                        controller: 'PlaylistCtrl'
+                    }
+                }
+            })
+
+            .state('app.single4', {
+                url: "/playlists/alo",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/pages/alo.html",
+                        controller: 'PlaylistCtrl'
+                    }
+                }
+            })
+
+            .state('app.single5', {
+                url: "/playlists/defesa",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/pages/defesa.html",
+                        controller: 'PlaylistCtrl'
+                    }
+                }
+            })
+
+            .state('app.single6', {
+                url: "/playlists/diario",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/pages/diario.html",
+                        controller: 'PlaylistCtrl'
+                    }
+                }
+            })        ;
+        // if none of the above states are matched, use this as the fallback
+        $urlRouterProvider.otherwise('/app/playlists');
+    });
