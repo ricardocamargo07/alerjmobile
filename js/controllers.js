@@ -40,7 +40,7 @@ angular.module('starter.controllers', [])
     { title: 'Notícias', id: 3 },
     { title: 'Alô, ALERJ!', id: 4 },
     { title: 'Defesa do Consumidor', id: 5 },
-    { title: 'Diário Oficial', id: 6 },
+    { title: 'Diário Oficial', id: 6 }
   ];
 })
 
