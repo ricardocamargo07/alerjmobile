@@ -35,12 +35,12 @@ angular.module('starter.controllers', [])
 
 .controller('PlaylistsCtrl', function($scope) {
   $scope.playlists = [
-    { title: 'Plenário Ao Vivo', id: 1 },
-    { title: 'Deputados', id: 2 },
-    { title: 'Notícias', id: 3 },
-    { title: 'Alô, ALERJ!', id: 4 },
-    { title: 'Defesa do Consumidor', id: 5 },
-    { title: 'Diário Oficial', id: 6 }
+    { title: 'Plenário Ao Vivo', id: 'plenario' },
+    { title: 'Deputados', id: 'deputados' },
+    { title: 'Notícias', id: 'noticias' },
+    { title: 'Alô, ALERJ!', id: 'alo' },
+    { title: 'Defesa do Consumidor', id: 'defesa' },
+    { title: 'Diário Oficial', id: 'diario' }
   ];
 })
 
