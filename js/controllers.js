@@ -39,7 +39,7 @@ angular.module('starter.controllers', [])
     { title: 'Deputados', id: 'deputados' },
     { title: 'Notícias', id: 'noticias' },
     { title: 'Alô, ALERJ!', id: 'alo' },
-    { title: 'Defesa do Consumidor', id: 'defesa' },
+    { title: 'Comissões Permanentes', id: 'comissoes' },
     { title: 'Diário Oficial', id: 'diario' }
   ];
 })

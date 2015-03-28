@@ -47,6 +47,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                     }
                 }
             })
+
             .state('app.playlists', {
                 url: "/playlists",
                 views: {
@@ -67,7 +68,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                 }
             })
 
-            .state('app.single2', {
+            .state('app.deputados', {
                 url: "/playlists/deputados",
                 views: {
                     'menuContent': {
@@ -77,7 +78,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                 }
             })
 
-            .state('app.single3', {
+            .state('app.noticias', {
                 url: "/playlists/noticias",
                 views: {
                     'menuContent': {
@@ -87,7 +88,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                 }
             })
 
-            .state('app.single4', {
+            .state('app.alo', {
                 url: "/playlists/alo",
                 views: {
                     'menuContent': {
@@ -97,17 +98,27 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                 }
             })
 
-            .state('app.single5', {
-                url: "/playlists/defesa",
+            .state('app.comissoes', {
+                url: "/playlists/comissoes",
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/pages/defesa.html",
+                        templateUrl: "templates/pages/comissoes.html",
                         controller: 'PlaylistCtrl'
                     }
                 }
             })
 
-            .state('app.single6', {
+            .state('app.comissoesDefesaDoConsumidor', {
+                url: "/playlists/comissoes/defesaDoConsumidor",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/pages/comissoes/defesaDoConsumidor.html",
+                        controller: 'PlaylistCtrl'
+                    }
+                }
+            })
+
+            .state('app.diario', {
                 url: "/playlists/diario",
                 views: {
                     'menuContent': {
@@ -115,7 +126,20 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                         controller: 'PlaylistCtrl'
                     }
                 }
-            })        ;
+            })
+
+            .state('app.aloAlerjChat', {
+                url: "/playlists/aloAlerjChat",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/pages/aloAlerjChat.html",
+                        controller: 'PlaylistCtrl'
+                    }
+                }
+            })
+
+            ;
+
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/playlists');
     });
