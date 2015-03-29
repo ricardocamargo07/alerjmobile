@@ -48,102 +48,102 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                 }
             })
 
-            .state('app.playlists', {
-                url: "/playlists",
+            .state('app.pages', {
+                url: "/pages",
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/playlists.html",
-                        controller: 'PlaylistsCtrl'
+                        templateUrl: "templates/pages.html",
+                        controller: 'PagesCtrl'
                     }
                 }
             })
 
             .state('app.single', {
-                url: "/playlists/plenario",
+                url: "/pages/plenario",
                 views: {
                     'menuContent': {
                         templateUrl: "templates/pages/plenario.html",
-                        controller: 'PlaylistCtrl'
+                        controller: 'PageCtrl'
                     }
                 }
             })
 
             .state('app.deputados', {
-                url: "/playlists/deputados",
+                url: "/pages/deputados",
                 views: {
                     'menuContent': {
                         templateUrl: "templates/pages/deputados.html",
-                        controller: 'PlaylistCtrl'
+                        controller: 'PageCtrl'
                     }
                 }
             })
 
             .state('app.noticias', {
-                url: "/playlists/noticias",
+                url: "/pages/noticias",
                 views: {
                     'menuContent': {
                         templateUrl: "templates/pages/noticias.html",
-                        controller: 'PlaylistCtrl'
+                        controller: 'PageCtrl'
                     }
                 }
             })
 
             .state('app.alo', {
-                url: "/playlists/alo",
+                url: "/pages/alo",
                 views: {
                     'menuContent': {
                         templateUrl: "templates/pages/alo.html",
-                        controller: 'PlaylistCtrl'
+                        controller: 'PageCtrl'
                     }
                 }
             })
 
             .state('app.comissoes', {
-                url: "/playlists/comissoes",
+                url: "/pages/comissoes",
                 views: {
                     'menuContent': {
                         templateUrl: "templates/pages/comissoes.html",
-                        controller: 'PlaylistCtrl'
+                        controller: 'PageCtrl'
                     }
                 }
             })
 
             .state('app.comissoesDefesaDoConsumidor', {
-                url: "/playlists/comissoes/defesaDoConsumidor",
+                url: "/pages/comissoes/defesaDoConsumidor",
                 views: {
                     'menuContent': {
                         templateUrl: "templates/pages/comissoes/defesaDoConsumidor.html",
-                        controller: 'PlaylistCtrl'
+                        controller: 'PageCtrl'
                     }
                 }
             })
 
             .state('app.noticias1', {
-                url: "/playlists/noticias/1",
+                url: "/pages/noticias/1",
                 views: {
                     'menuContent': {
                         templateUrl: "templates/pages/noticias/1.html",
-                        controller: 'PlaylistCtrl'
+                        controller: 'PageCtrl'
                     }
                 }
             })
 
             .state('app.diario', {
-                url: "/playlists/diario",
+                url: "/pages/diario",
                 views: {
                     'menuContent': {
                         templateUrl: "templates/pages/diario.html",
-                        controller: 'PlaylistCtrl'
+                        controller: 'PageCtrl'
                     }
                 }
             })
 
             .state('app.aloAlerjChat', {
-                url: "/playlists/aloAlerjChat",
+                url: "/pages/aloAlerjChat",
                 views: {
                     'menuContent': {
                         templateUrl: "templates/pages/aloAlerjChat.html",
-                        controller: 'PlaylistCtrl'
+                        controller: 'PageCtrl'
                     }
                 }
             })
@@ -151,5 +151,5 @@ angular.module('starter', ['ionic', 'starter.controllers'])
             ;
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/playlists');
+        $urlRouterProvider.otherwise('/app/pages');
     });

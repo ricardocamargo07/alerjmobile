@@ -33,8 +33,8 @@ angular.module('starter.controllers', [])
         };
     })
 
-    .controller('PlaylistsCtrl', function($scope) {
-        $scope.playlists = [
+    .controller('PagesCtrl', function($scope) {
+        $scope.pages = [
             { title: 'Plenário Ao Vivo', id: 'plenario' },
             { title: 'Deputados', id: 'deputados' },
             { title: 'Notícias', id: 'noticias' },
@@ -45,5 +45,5 @@ angular.module('starter.controllers', [])
         ];
     })
 
-    .controller('PlaylistCtrl', function($scope, $stateParams) {
+    .controller('PageCtrl', function($scope, $stateParams) {
     });
