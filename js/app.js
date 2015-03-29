@@ -118,6 +118,16 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                 }
             })
 
+            .state('app.noticias1', {
+                url: "/playlists/noticias/1",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/pages/noticias/1.html",
+                        controller: 'PlaylistCtrl'
+                    }
+                }
+            })
+
             .state('app.diario', {
                 url: "/playlists/diario",
                 views: {
