@@ -20,6 +20,7 @@ class CreateCongressmenTable extends Migration {
 			$table->integer('party_id')->unsigned()->index();
 			$table->integer('alerj_id')->unsigned();
 			$table->string('url');
+			$table->text('page')->nullable();
 			$table->timestamps();
 
 			$table->foreign('party_id')
