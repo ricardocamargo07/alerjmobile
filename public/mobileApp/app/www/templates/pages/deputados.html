@@ -1,5 +1,15 @@
 <ion-view view-title="Deputados">
-  <ion-content>
-      <h1>Deputados</h1>
-  </ion-content>
+    <ion-content>
+        <div class="list">
+            <div ng-repeat="party in parties">
+                <div class="item item-divider">
+                    {{party.name}} - {{party.leader}}
+                </div>
+
+                <a class="item" ng-repeat="congressman in party.congressmen" href="#/app/congressman/{{page.id}}">
+                    {{congressman.name}} ({{congressman.email}})
+                </a>
+            </div>
+        </div>
+    </ion-content>
 </ion-view>

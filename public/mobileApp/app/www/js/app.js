@@ -53,7 +53,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                 views: {
                     'menuContent': {
                         templateUrl: "templates/pages.html",
-                        controller: 'PagesCtrl'
+                        controller: 'PagesController'
                     }
                 }
             })
@@ -63,7 +63,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                 views: {
                     'menuContent': {
                         templateUrl: "templates/pages/plenario.html",
-                        controller: 'PageCtrl'
+                        controller: 'PageController'
                     }
                 }
             })
@@ -73,7 +73,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                 views: {
                     'menuContent': {
                         templateUrl: "templates/pages/deputados.html",
-                        controller: 'PageCtrl'
+                        controller: 'PartiesController'
                     }
                 }
             })
@@ -83,7 +83,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                 views: {
                     'menuContent': {
                         templateUrl: "templates/pages/noticias.html",
-                        controller: 'PageCtrl'
+                        controller: 'PageController'
                     }
                 }
             })
@@ -93,7 +93,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                 views: {
                     'menuContent': {
                         templateUrl: "templates/pages/alo.html",
-                        controller: 'PageCtrl'
+                        controller: 'PageController'
                     }
                 }
             })
@@ -103,7 +103,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                 views: {
                     'menuContent': {
                         templateUrl: "templates/pages/comissoes.html",
-                        controller: 'PageCtrl'
+                        controller: 'PageController'
                     }
                 }
             })
@@ -113,7 +113,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                 views: {
                     'menuContent': {
                         templateUrl: "templates/pages/comissoes/defesaDoConsumidor.html",
-                        controller: 'PageCtrl'
+                        controller: 'PageController'
                     }
                 }
             })
@@ -123,7 +123,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                 views: {
                     'menuContent': {
                         templateUrl: "templates/pages/noticias/1.html",
-                        controller: 'PageCtrl'
+                        controller: 'PageController'
                     }
                 }
             })
@@ -133,7 +133,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                 views: {
                     'menuContent': {
                         templateUrl: "templates/pages/diario.html",
-                        controller: 'PageCtrl'
+                        controller: 'PageController'
                     }
                 }
             })
@@ -143,7 +143,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                 views: {
                     'menuContent': {
                         templateUrl: "templates/pages/aloAlerjChat.html",
-                        controller: 'PageCtrl'
+                        controller: 'PageController'
                     }
                 }
             })

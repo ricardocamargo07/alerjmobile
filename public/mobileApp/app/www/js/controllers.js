@@ -33,7 +33,7 @@ angular.module('starter.controllers', [])
         };
     })
 
-    .controller('PagesCtrl', function($scope) {
+    .controller('PagesController', function($scope) {
         $scope.pages = [
             { title: 'Plenário Ao Vivo', id: 'plenario' },
             { title: 'Deputados', id: 'deputados' },
@@ -45,5 +45,12 @@ angular.module('starter.controllers', [])
         ];
     })
 
-    .controller('PageCtrl', function($scope, $stateParams) {
+    .controller('PartiesController', function($scope, $http) {
+        $http.get('http://api.alerj.com/api/v1.0/parties')
+            .then(function(res){
+                $scope.parties = res.data;
+            });
+    })
+
+    .controller('PageController', function($scope, $stateParams) {
     });
