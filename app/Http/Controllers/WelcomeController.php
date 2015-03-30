@@ -1,5 +1,9 @@
 <?php namespace App\Http\Controllers;
 
+use App\Congressman;
+use App\Party;
+use App\Services\Scraper;
+
 class WelcomeController extends Controller {
 
 	/*
@@ -30,6 +34,8 @@ class WelcomeController extends Controller {
 	 */
 	public function index()
 	{
+		return Party::with('congressmen')->get();
+
 		return view('welcome');
 	}
 
