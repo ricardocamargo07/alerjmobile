@@ -78,6 +78,16 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                 }
             })
 
+            .state('app.deputado', {
+                url: "/pages/congressman",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/pages/deputados.html",
+                        controller: 'PartiesController'
+                    }
+                }
+            })
+
             .state('app.noticias', {
                 url: "/pages/noticias",
                 views: {

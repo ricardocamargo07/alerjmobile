@@ -18,6 +18,7 @@ class CreateCongressmenTable extends Migration {
 			$table->string('name');
 			$table->string('email')->unique();
 			$table->integer('party_id')->unsigned()->index();
+			$table->integer('alerj_id')->unsigned();
 			$table->string('url');
 			$table->timestamps();
 

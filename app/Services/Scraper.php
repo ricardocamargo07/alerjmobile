@@ -82,6 +82,7 @@ class Scraper {
 				if (count($matches) > 1)
 				{
 					$member['url'] = 'http://www.alerj.rj.gov.br/common/deputado.asp?codigo='.$matches[1];
+					$member['alerj_id'] = $matches[1];
 				}
 			}
 			elseif (strpos($line, '@') == false)
