@@ -110,12 +110,7 @@ class Scraper {
 			$item = str_replace('Ã¡', 'á', $item);
 			$item = str_replace('Ã¢', 'â', $item);
 			$item = str_replace('Ã�', 'Á', $item);
-			$item = str_replace('X', 'x', $item);
-			$item = str_replace('X', 'x', $item);
-			$item = str_replace('X', 'x', $item);
 		});
-
-		dd($parties);
 
 		return $parties;
 	}
