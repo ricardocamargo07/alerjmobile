@@ -13,14 +13,12 @@ class Scraper {
 
 		$driver->get('http://www.alerj.rj.gov.br/deputados/center_dep_busca.asp');
 
-		$driver->takeScreenshot('/var/www/alerj/mobile/screen2.png');
-
-		sleep(2);
+		sleep(3);
 
 		$driver->executeScript("document.querySelector('select[name=\"partido\"] option[value=\"TODOS\"]').selected = 'selected';");
 		$driver->executeScript('document.busca.submit();');
 
-		sleep(2);
+		sleep(4);
 
 		$crawler = new Crawler($driver->getPageSource());
 
