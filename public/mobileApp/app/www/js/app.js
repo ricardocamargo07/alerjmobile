@@ -79,11 +79,11 @@ angular.module('starter', ['ionic', 'starter.controllers'])
             })
 
             .state('app.deputado', {
-                url: "/pages/congressman",
+                url: "/pages/congressman/:congressman_id",
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/pages/deputados.html",
-                        controller: 'PartiesController'
+                        templateUrl: "templates/pages/deputado.html",
+                        controller: 'CongressmanController'
                     }
                 }
             })

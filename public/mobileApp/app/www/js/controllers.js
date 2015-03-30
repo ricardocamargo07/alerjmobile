@@ -12,28 +12,33 @@ angular.module('starter.controllers', [])
         });
 
         // Triggered in the login modal to close it
-        $scope.closeLogin = function() {
+        $scope.closeLogin = function()
+        {
             $scope.modal.hide();
         };
 
         // Open the login modal
-        $scope.login = function() {
+        $scope.login = function()
+        {
             $scope.modal.show();
         };
 
         // Perform the login action when the user submits the login form
-        $scope.doLogin = function() {
+        $scope.doLogin = function()
+        {
             console.log('Doing login', $scope.loginData);
 
             // Simulate a login delay. Remove this and replace with your login
             // code if using a login system
-            $timeout(function() {
+            $timeout(function()
+            {
                 $scope.closeLogin();
             }, 1000);
         };
     })
 
-    .controller('PagesController', function($scope) {
+    .controller('PagesController', function($scope)
+    {
         $scope.pages = [
             { title: 'Plenário Ao Vivo', id: 'plenario' },
             { title: 'Deputados', id: 'deputados' },
@@ -45,12 +50,21 @@ angular.module('starter.controllers', [])
         ];
     })
 
-    .controller('PartiesController', function($scope, $http) {
+    .controller('PartiesController', function($scope, $http)
+    {
         $http.get('http://alerjapi.antoniocarlosribeiro.com/api/v1.0/parties')
             .then(function(res){
                 $scope.parties = res.data;
             });
     })
 
-    .controller('PageController', function($scope, $stateParams) {
+    .controller('CongressmanController', function($scope, $stateParams, $sce)
+    {
+        $scope.congressman_profile_link = $sce.trustAsResourceUrl("http://www.alerj.rj.gov.br/common/deputado.asp?codigo=" + $stateParams.congressman_id);
+
+        console.log($scope.congressman_profile_link);
+    })
+
+    .controller('PageController', function($scope, $stateParams)
+    {
     });
