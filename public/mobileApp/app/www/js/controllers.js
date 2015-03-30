@@ -46,7 +46,7 @@ angular.module('starter.controllers', [])
     })
 
     .controller('PartiesController', function($scope, $http) {
-        $http.get('http://api.alerj.com/api/v1.0/parties')
+        $http.get('http://alerjapi.antoniocarlosribeiro.com/api/v1.0/parties')
             .then(function(res){
                 $scope.parties = res.data;
             });
