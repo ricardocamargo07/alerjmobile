@@ -97,6 +97,26 @@ class Scraper {
 
 		$driver->quit();
 
+		return $this->convertAccents($parties);
+	}
+
+	private function convertAccents($parties)
+	{
+		array_walk_recursive($parties, function (&$item, $key)
+		{
+			$item = str_replace('Ã£', 'ã', $item);
+			$item = str_replace('Ã©', 'é', $item);
+
+			$item = str_replace('Ã¡', 'á', $item);
+			$item = str_replace('Ã¢', 'â', $item);
+			$item = str_replace('Ã�', 'Á', $item);
+			$item = str_replace('X', 'x', $item);
+			$item = str_replace('X', 'x', $item);
+			$item = str_replace('X', 'x', $item);
+		});
+
+		dd($parties);
+
 		return $parties;
 	}
 
