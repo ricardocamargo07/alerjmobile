@@ -8,7 +8,7 @@ class Congressman extends Model {
 
 	protected $table = 'congressmen';
 
-	protected $fillable = ['name', 'email', 'party_id', 'url', 'alerj_id'];
+	protected $fillable = ['name', 'email', 'party_id', 'url', 'alerj_id', 'page'];
 
 	public function party()
 	{

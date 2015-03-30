@@ -7,20 +7,23 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class Scraper {
 
+	public function __construct()
+	{
+		$this->driver = new WebDriver();
+	}
+
 	public function scrapeCongressmen()
 	{
-		$driver = new WebDriver();
-
-		$driver->get('http://www.alerj.rj.gov.br/deputados/center_dep_busca.asp');
+		$this->driver->get('http://www.alerj.rj.gov.br/deputados/center_dep_busca.asp');
 
 		sleep(3);
 
-		$driver->executeScript("document.querySelector('select[name=\"partido\"] option[value=\"TODOS\"]').selected = 'selected';");
-		$driver->executeScript('document.busca.submit();');
+		$this->driver->executeScript("document.querySelector('select[name=\"partido\"] option[value=\"TODOS\"]').selected = 'selected';");
+		$this->driver->executeScript('document.busca.submit();');
 
 		sleep(4);
 
-		$crawler = new Crawler($driver->getPageSource());
+		$crawler = new Crawler($this->driver->getPageSource());
 
 		$crawler = $crawler->filter('html > body > div > table > tbody > tr > td > table > tbody > tr > td > div')->nextAll();
 
@@ -95,25 +98,56 @@ class Scraper {
 			}
 		}
 
-		$driver->quit();
+		foreach ($parties as $party_id => $party)
+		{
+			foreach ($party['members'] as $member_id => $member)
+			{
+				$parties[$party_id]['members'][$member_id]['page'] = $this->scrapeProfilePage($member);
+			}
+		}
 
-		return $this->convertAccents($parties);
+		$this->driver->quit();
+
+		return $this->arrayConvertAccents($parties);
 	}
 
-	private function convertAccents($parties)
+	private function arrayConvertAccents($parties)
 	{
 		array_walk_recursive($parties, function (&$item, $key)
 		{
-			$item = str_replace('Ã£', 'ã', $item);
-			$item = str_replace('Ã©', 'é', $item);
-
-			$item = str_replace('Ã¡', 'á', $item);
-			$item = str_replace('Ã¢', 'â', $item);
-			$item = str_replace('Ã�', 'Á', $item);
+			$item = $this->convertAccents($item);
 		});
 
 		return $parties;
 	}
 
-}
+	function convertAccents($item)
+	{
+		$item = str_replace('Ã£', 'ã', $item);
+		$item = str_replace('Ã©', 'é', $item);
 
+		$item = str_replace('Ã¡', 'á', $item);
+		$item = str_replace('Ã¢', 'â', $item);
+		$item = str_replace('Ã�', 'Á', $item);
+
+		$item = str_replace('Ãª', 'ê', $item);
+
+		return $item;
+	}
+
+	private function scrapeProfilePage($member)
+	{
+		echo "Scraping page for {$member['name']} \n";
+
+		$this->driver->get($member['url']);
+
+		$crawler = new Crawler($this->driver->getPageSource());
+
+		$html = $crawler->filter('body > table:nth-child(5) > tbody > tr > td > table')->html();
+
+		$html = str_replace('<img src="../imagens', '<img src="http://www.alerj.rj.gov.br/imagens', $html);
+
+		return $this->convertAccents("<table>$html</table>");
+	}
+
+}
