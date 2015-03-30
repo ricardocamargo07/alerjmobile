@@ -61,7 +61,7 @@ angular.module('starter.controllers', [])
     .controller('CongressmanController', function($scope, $stateParams, $sce)
     {
         $scope.congressman_profile_link = $sce.trustAsResourceUrl("http://www.alerj.rj.gov.br/common/deputado.asp?codigo=" + $stateParams.congressman_id);
-        
+
         $scope.congressman_name = $stateParams.congressman_name;
     })
 

@@ -98,13 +98,13 @@ class Scraper {
 			}
 		}
 
-		foreach ($parties as $party_id => $party)
-		{
-			foreach ($party['members'] as $member_id => $member)
-			{
-				$parties[$party_id]['members'][$member_id]['page'] = $this->scrapeProfilePage($member);
-			}
-		}
+//		foreach ($parties as $party_id => $party)
+//		{
+//			foreach ($party['members'] as $member_id => $member)
+//			{
+//				$parties[$party_id]['members'][$member_id]['page'] = $this->scrapeProfilePage($member);
+//			}
+//		}
 
 		$this->driver->quit();
 
