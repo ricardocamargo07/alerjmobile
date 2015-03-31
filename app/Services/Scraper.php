@@ -218,7 +218,7 @@ class Scraper {
 
 		$crawler = $crawler->filter('body');
 
-		dd($crawler->html());
+		return $crawler->html();
 	}
 
 }

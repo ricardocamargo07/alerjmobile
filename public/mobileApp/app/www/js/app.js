@@ -148,6 +148,16 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                 }
             })
 
+            .state('app.regiment', {
+                url: "/pages/regiment",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/pages/regiment.html",
+                        controller: 'RegimentController'
+                    }
+                }
+            })
+
             .state('app.aloAlerjChat', {
                 url: "/pages/aloAlerjChat",
                 views: {
