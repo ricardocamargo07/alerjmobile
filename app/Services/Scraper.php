@@ -149,6 +149,12 @@ class Scraper {
 		$html = str_replace("<img src='../imagens", "<img src='http://www.alerj.rj.gov.br/imagens", $html);
 
 		$html = str_replace('width="499"', "", $html);
+		$html = str_replace('width=499', "", $html);
+		$html = str_replace('width="15"', "", $html);
+		$html = str_replace('width=15', "", $html);
+		$html = str_replace('<td colspan=3 bgcolor=#FFFFFF align=center>', '<td>&nbsp;</td><td colspan=3 bgcolor=#FFFFFF align=center>', $html);
+		$html = str_replace('align=center', '', $html);
+		$html = str_replace('nowrap', '', $html);
 
 		return $this->convertAccents(utf8_encode("<table>$html</table>"));
 	}

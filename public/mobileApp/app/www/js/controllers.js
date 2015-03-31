@@ -62,7 +62,8 @@ angular.module('starter.controllers', [])
     {
         $scope.congressman_name = $stateParams.congressman_name;
 
-        $http.get('http://alerjapi.antoniocarlosribeiro.com/api/v1.0/congressman/profile/'+$stateParams.congressman_id)
+        // $http.get('http://alerjapi.antoniocarlosribeiro.com/api/v1.0/congressman/profile/'+$stateParams.congressman_id)
+        $http.get('http://api.alerj.com/api/v1.0/congressman/profile/'+$stateParams.congressman_id)
             .then(function(res){
                 $scope.congressman_page = $sce.trustAsHtml(res.data);
 
