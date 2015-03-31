@@ -148,6 +148,8 @@ class Scraper {
 
 		$html = str_replace("<img src='../imagens", "<img src='http://www.alerj.rj.gov.br/imagens", $html);
 
+		$html = str_replace('width="499"', "", $html);
+
 		return $this->convertAccents(utf8_encode("<table>$html</table>"));
 	}
 
