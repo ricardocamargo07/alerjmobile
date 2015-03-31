@@ -98,13 +98,13 @@ class Scraper {
 			}
 		}
 
-//		foreach ($parties as $party_id => $party)
-//		{
-//			foreach ($party['members'] as $member_id => $member)
-//			{
-//				$parties[$party_id]['members'][$member_id]['page'] = $this->scrapeProfilePage($member);
-//			}
-//		}
+		foreach ($parties as $party_id => $party)
+		{
+			foreach ($party['members'] as $member_id => $member)
+			{
+				$parties[$party_id]['members'][$member_id]['page'] = $this->scrapeProfilePage($member);
+			}
+		}
 
 		$this->driver->quit();
 
@@ -139,15 +139,16 @@ class Scraper {
 	{
 		echo "Scraping page for {$member['name']} \n";
 
-		$this->driver->get($member['url']);
+		$html = file_get_contents($member['url']);
+		$html = str_replace(chr(13), '', $html);
+		$html = str_replace(chr(10), '', $html);
 
-		$crawler = new Crawler($this->driver->getPageSource());
-
-		$html = $crawler->filter('body > table:nth-child(5) > tbody > tr > td > table')->html();
+		$html = substr($html, strpos($html, '<table border=0 vspace=0 hspace=0 cellspacing=0 cellpadding=0>'));
+		$html = substr($html, 0, strpos($html, '</table>') + 8);
 
 		$html = str_replace('<img src="../imagens', '<img src="http://www.alerj.rj.gov.br/imagens', $html);
 
-		return $this->convertAccents("<table>$html</table>");
+		return $this->convertAccents(utf8_encode("<table>$html</table>"));
 	}
 
 }
