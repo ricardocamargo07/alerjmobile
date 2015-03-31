@@ -3,12 +3,8 @@
 namespace App\Console\Commands;
 
 use DB;
-use App\Congressman;
-use App\Party;
 use App\Services\Scraper;
 use Illuminate\Console\Command;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
 
 class Scrape extends Command {
 
@@ -44,16 +40,13 @@ class Scrape extends Command {
 	public function fire(Scraper $scraper)
 	{
 		DB::table('parties')->delete();
+		DB::table('regiment')->delete();
 
-		foreach ($scraper->scrapeCongressmen() as $party)
-		{
-			$model = Party::firstOrCreate(array_except($party, 'members'));
+		$this->info('Scraping congressmen...');
+		//$scraper->scrapeCongressmen();
 
-			foreach ($party['members'] as $congressman)
-			{
-				Congressman::firstOrCreate(array_merge(['party_id' => $model->id], $congressman));
-			}
-		}
+		$this->info('Scraping regiment...');
+		$scraper->scrapeRegiment();
 	}
 
 	/**

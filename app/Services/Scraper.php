@@ -2,6 +2,9 @@
 
 namespace App\Services;
 
+use App\Party;
+use App\Regiment;
+use App\Congressman;
 use App\Services\Locator;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -13,6 +16,19 @@ class Scraper {
 	}
 
 	public function scrapeCongressmen()
+	{
+		foreach ($this->getCongressmen() as $party)
+		{
+			$model = Party::firstOrCreate(array_except($party, 'members'));
+
+			foreach ($party['members'] as $congressman)
+			{
+				Congressman::firstOrCreate(array_merge(['party_id' => $model->id], $congressman));
+			}
+		}
+	}
+
+	public function getCongressmen()
 	{
 		$this->driver->get('http://www.alerj.rj.gov.br/deputados/center_dep_busca.asp');
 
@@ -157,6 +173,52 @@ class Scraper {
 		$html = str_replace('nowrap', '', $html);
 
 		return $this->convertAccents(utf8_encode("<table>$html</table>"));
+	}
+
+	public function scrapeRegiment()
+	{
+		$regiment = json_decode(file_get_contents('http://alerjln1.alerj.rj.gov.br/regiment2.nsf/e975dc081da5ea8c032568f5006d4467/a9574763868365930325682b007d9a41?readviewentries&outputformat=json&Count=1000'), true);
+
+		$regiment = $regiment['viewentry'];
+
+		foreach ($regiment as $item)
+		{
+			$data = [];
+
+			$data['position'] = $item['@position'];
+
+			$data['level'] = substr_count($data['position'], '.');
+
+			if (isset($item['@unid']))
+			{
+				$data['document_id'] = $item['@unid'];
+
+				$data['page'] = $this->scrapeRegimentPage($item['@unid']);
+
+				$data['title'] = $item['entrydata'][3]['text'][0];
+			}
+			else
+			{
+				$data['title'] = $item['entrydata'][0]['text'][0];
+			}
+
+			echo $data['title']."\n";
+
+			Regiment::create($data);
+		}
+	}
+
+	private function scrapeRegimentPage($item)
+	{
+		$url = "http://alerjln1.alerj.rj.gov.br/regiment2.nsf/e975dc081da5ea8c032568f5006d4467/$item?OpenDocument";
+
+		$page = file_get_contents($url);
+
+		$crawler = new Crawler($page);
+
+		$crawler = $crawler->filter('body');
+
+		dd($crawler->html());
 	}
 
 }
