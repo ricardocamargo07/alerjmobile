@@ -1,14 +1,5 @@
 <ion-view view-title="{{congressman_name}}">
     <ion-content>
-        <style>
-            .iframe-wrapper iframe {
-                width: 100%;
-                height: 100%;
-            }
-        </style>
-
-        <ion-content scroll="true" overflow-scroll="true" class="iframe-wrapper">
-            <iframe data-tap-disabled="true" ng-src="{{congressman_profile_link}}"></iframe>
-        </ion-content>
+        <div ng-bind-html="congressman_page"></div>
     </ion-content>
 </ion-view>

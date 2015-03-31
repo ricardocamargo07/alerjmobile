@@ -146,7 +146,7 @@ class Scraper {
 		$html = substr($html, strpos($html, '<table border=0 vspace=0 hspace=0 cellspacing=0 cellpadding=0>'));
 		$html = substr($html, 0, strpos($html, '</table>') + 8);
 
-		$html = str_replace('<img src="../imagens', '<img src="http://www.alerj.rj.gov.br/imagens', $html);
+		$html = str_replace("<img src='../imagens", '<img src="http://www.alerj.rj.gov.br/imagens', $html);
 
 		return $this->convertAccents(utf8_encode("<table>$html</table>"));
 	}

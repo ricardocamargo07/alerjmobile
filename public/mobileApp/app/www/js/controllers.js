@@ -58,11 +58,16 @@ angular.module('starter.controllers', [])
             });
     })
 
-    .controller('CongressmanController', function($scope, $stateParams, $sce)
+    .controller('CongressmanController', function($scope, $stateParams, $sce, $http)
     {
-        $scope.congressman_profile_link = $sce.trustAsResourceUrl("http://www.alerj.rj.gov.br/common/deputado.asp?codigo=" + $stateParams.congressman_id);
-
         $scope.congressman_name = $stateParams.congressman_name;
+
+        $http.get('http://alerjapi.antoniocarlosribeiro.com/api/v1.0/congressman/profile/'+$stateParams.congressman_id)
+            .then(function(res){
+                $scope.congressman_page = $sce.trustAsHtml(res.data);
+
+                console.log($sce.trustAsHtml(res.data));
+            });
     })
 
     .controller('PageController', function($scope, $stateParams)
