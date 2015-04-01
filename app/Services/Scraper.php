@@ -6,14 +6,24 @@ use App\Party;
 use App\Document;
 use App\DocumentPage;
 use App\Congressman;
-use App\Services\Locator;
 use Symfony\Component\DomCrawler\Crawler;
 
 class Scraper {
 
-	public function __construct()
+	private $client;
+
+	/**
+	 * @var DocumentPageScraper
+	 */
+	private $documentPageScraper;
+
+	public function __construct(HttpClient $client, DocumentPageScraper $documentPageScraper)
 	{
 		$this->driver = new WebDriver();
+
+		$this->client = $client;
+
+		$this->documentPageScraper = $documentPageScraper;
 	}
 
 	public function scrapeCongressmen()
@@ -156,7 +166,7 @@ class Scraper {
 	{
 		echo "Scraping page for {$member['name']} \n";
 
-		$html = file_get_contents($member['url']);
+		$html = $this->client->getRaw($member['url']);
 		$html = str_replace(chr(13), '', $html);
 		$html = str_replace(chr(10), '', $html);
 
@@ -178,7 +188,7 @@ class Scraper {
 
 	public function scrapeDocuments()
 	{
-		$document = Document::firstOrCreate(['name' => 'Regimento Interno', 'base_url' => 'http://alerjln1.alerj.rj.gov.br/regiment2.nsf/e975dc081da5ea8c032568f5006d4467']);
+		$document = Document::firstOrCreate(['name' => 'Documento Interno', 'base_url' => 'http://alerjln1.alerj.rj.gov.br/regiment2.nsf/e975dc081da5ea8c032568f5006d4467']);
 
 		$this->scrapeDocument($document);
 
@@ -189,7 +199,7 @@ class Scraper {
 
 	public function scrapeDocument($document)
 	{
-		$regiment = json_decode(file_get_contents($document->base_url.'?readviewentries&outputformat=json&Count=1000'), true);
+		$regiment = $this->client->getArray($document->base_url . '?readviewentries&outputformat=json&Count=1000');
 
 		$regiment = $regiment['viewentry'];
 
@@ -207,7 +217,7 @@ class Scraper {
 			{
 				$data['alerj_id'] = $item['@unid'];
 
-				$data['page'] = $this->scrapeRegimentPage($document->base_url, $item['@unid']);
+				$data['page'] = $this->scrapeDocumentPage($document->base_url, $item['@unid']);
 			}
 
 			$data['title'] = $this->findDocumentText($item['entrydata']);
@@ -218,17 +228,9 @@ class Scraper {
 		}
 	}
 
-	private function scrapeRegimentPage($base_url, $item)
+	private function scrapeDocumentPage($base_url, $item)
 	{
-		$url = "$base_url/$item?OpenDocument";
-
-		$page = file_get_contents($url);
-
-		$crawler = new Crawler($page);
-
-		$crawler = $crawler->filter('body');
-
-		return $crawler->html();
+		return $this->documentPageScraper->scrape($base_url, $item);
 	}
 
 	private function findDocumentText($entrydata)

@@ -1,3 +1,6 @@
+apiUrl = 'http://alerjapi.antoniocarlosribeiro.com';
+//apiUrl = 'http://api.alerj.com';
+
 angular.module('starter.controllers', [])
 
     .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
@@ -42,6 +45,7 @@ angular.module('starter.controllers', [])
         $scope.pages = [
             { title: 'Plenário Ao Vivo', id: 'plenario' },
             { title: 'Deputados', id: 'deputados' },
+            { title: 'Ordem do Dia', id: 'ordemDoDia' },
             { title: 'Notícias', id: 'noticias' },
             { title: 'Alô, ALERJ!', id: 'alo' },
             { title: 'Comissões Permanentes', id: 'comissoes' },
@@ -53,7 +57,7 @@ angular.module('starter.controllers', [])
 
     .controller('PartiesController', function($scope, $http)
     {
-        $http.get('http://alerjapi.antoniocarlosribeiro.com/api/v1.0/parties')
+        $http.get(apiUrl+'/api/v1.0/parties')
             .then(function(res){
                 $scope.parties = res.data;
             });
@@ -64,19 +68,16 @@ angular.module('starter.controllers', [])
         $scope.congressman_name = $stateParams.congressman_name;
 
         // $http.get('http://alerjapi.antoniocarlosribeiro.com/api/v1.0/congressman/profile/'+$stateParams.congressman_id)
-        $http.get('http://alerjapi.antoniocarlosribeiro.com/api/v1.0/congressman/profile/'+$stateParams.congressman_id)
+        $http.get(apiUrl+'/api/v1.0/congressman/profile/'+$stateParams.congressman_id)
             .then(function(res){
                 $scope.congressman_page = $sce.trustAsHtml(res.data);
-
-                console.log($sce.trustAsHtml(res.data));
             });
     })
 
     .controller('DocumentsController', function($scope, $http, $stateParams)
     {
-        $http.get('http://alerjapi.antoniocarlosribeiro.com/api/v1.0/documentsPages/'+$stateParams.name)
+        $http.get(apiUrl+'/api/v1.0/documentsPages/'+$stateParams.name)
             .then(function(res){
-                console.log(res.data);
                 $scope.documents = res.data;
                 $scope.title = $stateParams.name;
             });
@@ -88,10 +89,25 @@ angular.module('starter.controllers', [])
 
     .controller('DocumentsPagesController', function($scope, $http, $stateParams)
     {
-        console.log($stateParams);
-        $http.get('http://alerjapi.antoniocarlosribeiro.com/api/v1.0/documentsPages/page/'+$stateParams.page_id)
+        $http.get(apiUrl+'/api/v1.0/documentsPages/page/'+$stateParams.page_id)
             .then(function(res){
                 $scope.page = res.data;
+            });
+    })
+
+    .controller('OrdemDoDiaController', function($scope, $http)
+    {
+        $http.get(apiUrl+'/api/v1.0/schedule')
+            .then(function(res){
+                $scope.schedule = res.data;
+            });
+    })
+
+    .controller('OrdemDoDiaItemController', function($scope, $http, $stateParams)
+    {
+        $http.get(apiUrl+'/api/v1.0/schedule/'+$stateParams.alerj_id)
+            .then(function(res){
+                $scope.item = res.data;
             });
     })
 

@@ -178,7 +178,27 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                 }
             })
 
-            ;
+            .state('app.ordemDoDia', {
+                url: "/pages/ordemDoDia",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/pages/ordemDoDia.html",
+                        controller: 'OrdemDoDiaController'
+                    }
+                }
+            })
+
+            .state('app.ordemDoDiaItem', {
+                url: "/pages/schedule/item/:alerj_id",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/pages/ordemDoDiaItem.html",
+                        controller: 'OrdemDoDiaItemController'
+                    }
+                }
+            })
+
+        ;
 
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/pages');

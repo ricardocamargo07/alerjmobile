@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Sevices;
+namespace App\Services;
 
 use Symfony\Component\CssSelector\CssSelector;
 use Symfony\Component\CssSelector\Exception\ParseException;

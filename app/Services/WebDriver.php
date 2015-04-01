@@ -6,7 +6,7 @@ use Exception;
 use WebDriverBy;
 use RemoteWebDriver;
 use WebDriverDimension;
-use App\Sevices\Locator;
+use App\Services\Locator;
 use WebDriverCapabilityType;
 use WebDriverExpectedCondition;
 
