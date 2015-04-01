@@ -45,7 +45,7 @@ class ScheduleScraper {
 			{
 				$appointment['alerj_id'] = $item['@unid'];
 				$appointment['carbon'] = $this->toDateTime($item['entrydata'][0]['datetime'][0] . $item['entrydata'][1]['datetime'][0]);
-				$appointment['title'] =  trim($item['entrydata'][3]['text'][0]) . ' (' . trim($appointment['carbon']->format('d-m-Y H\hi')) . ')';
+				$appointment['title'] =  'Dia ' . (int) trim($appointment['carbon']->format('d')) . ' - ' . trim($item['entrydata'][3]['text'][0]) . ' (' . trim($appointment['carbon']->format('H\hi')) . ')';
 			}
 
 			$schedule[] = $appointment;
