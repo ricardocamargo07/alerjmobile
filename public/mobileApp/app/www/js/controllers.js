@@ -77,6 +77,10 @@ angular.module('starter.controllers', [])
             .then(function(res){
                 $scope.regiment = res.data;
             });
+
+        $scope.clearSearch = function() {
+            $scope.data.searchQuery = '';
+        };
     })
 
     .controller('RegimentDocumentController', function($scope, $http, $stateParams)
