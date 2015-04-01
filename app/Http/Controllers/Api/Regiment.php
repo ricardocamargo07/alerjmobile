@@ -12,4 +12,9 @@ class Regiment extends Controller {
 		return RegimentModel::orderBy('id')->get();
 	}
 
+	public function find($id)
+	{
+		return RegimentModel::find($id);
+	}
+
 }

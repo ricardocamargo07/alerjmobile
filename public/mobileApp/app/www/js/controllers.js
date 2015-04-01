@@ -45,7 +45,7 @@ angular.module('starter.controllers', [])
             { title: 'Notícias', id: 'noticias' },
             { title: 'Alô, ALERJ!', id: 'alo' },
             { title: 'Comissões Permanentes', id: 'comissoes' },
-            { title: 'Regimento Interno', id: 'regimento' },
+            { title: 'Regimento Interno', id: 'regiment' },
             { title: 'Diário Oficial', id: 'diario' }
         ];
     })
@@ -74,6 +74,15 @@ angular.module('starter.controllers', [])
     .controller('RegimentController', function($scope, $http)
     {
         $http.get('http://api.alerj.com/api/v1.0/regiment')
+            .then(function(res){
+                $scope.regiment = res.data;
+            });
+    })
+
+    .controller('RegimentDocumentController', function($scope, $http, $stateParams)
+    {
+        console.log($stateParams);
+        $http.get('http://api.alerj.com/api/v1.0/regiment/'+$stateParams.document_id)
             .then(function(res){
                 $scope.regiment = res.data;
             });

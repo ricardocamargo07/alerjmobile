@@ -43,7 +43,7 @@ class Scrape extends Command {
 		DB::table('regiment')->delete();
 
 		$this->info('Scraping congressmen...');
-		//$scraper->scrapeCongressmen();
+		$scraper->scrapeCongressmen();
 
 		$this->info('Scraping regiment...');
 		$scraper->scrapeRegiment();

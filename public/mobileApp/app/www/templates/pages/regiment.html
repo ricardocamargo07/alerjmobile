@@ -1,8 +1,14 @@
-<ion-view view-title="Deputados">
+<ion-view view-title="Regimento Interno">
     <ion-content>
         <div class="list">
             <div ng-repeat="item in regiment">
-                {{item.title}}
+                <div ng-if="! item.document_id" class="item item-divider">
+                    <strong>{{item.title}}</strong>
+                </div>
+
+                <a class="item" ng-if="item.document_id" href="#/app/pages/regiment/{{item.id}}">
+                    {{item.title}}
+                </a>
             </div>
         </div>
     </ion-content>
