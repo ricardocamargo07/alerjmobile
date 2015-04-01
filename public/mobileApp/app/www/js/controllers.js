@@ -73,7 +73,7 @@ angular.module('starter.controllers', [])
 
     .controller('RegimentController', function($scope, $http)
     {
-        $http.get('http://api.alerj.com/api/v1.0/regiment')
+        $http.get('http://alerjapi.antoniocarlosribeiro.com/api/v1.0/regiment')
             .then(function(res){
                 $scope.regiment = res.data;
             });
@@ -82,7 +82,7 @@ angular.module('starter.controllers', [])
     .controller('RegimentDocumentController', function($scope, $http, $stateParams)
     {
         console.log($stateParams);
-        $http.get('http://api.alerj.com/api/v1.0/regiment/'+$stateParams.document_id)
+        $http.get('http://alerjapi.antoniocarlosribeiro.com/api/v1.0/regiment/'+$stateParams.document_id)
             .then(function(res){
                 $scope.regiment = res.data;
             });
