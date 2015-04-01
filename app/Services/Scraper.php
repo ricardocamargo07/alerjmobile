@@ -3,7 +3,8 @@
 namespace App\Services;
 
 use App\Party;
-use App\Regiment;
+use App\Document;
+use App\DocumentPage;
 use App\Congressman;
 use App\Services\Locator;
 use Symfony\Component\DomCrawler\Crawler;
@@ -175,9 +176,20 @@ class Scraper {
 		return $this->convertAccents(utf8_encode("<table>$html</table>"));
 	}
 
-	public function scrapeRegiment()
+	public function scrapeDocuments()
 	{
-		$regiment = json_decode(file_get_contents('http://alerjln1.alerj.rj.gov.br/regiment2.nsf/e975dc081da5ea8c032568f5006d4467/a9574763868365930325682b007d9a41?readviewentries&outputformat=json&Count=1000'), true);
+//		$document = Document::firstOrCreate(['name' => 'Regimento Interno', 'base_url' => 'http://alerjln1.alerj.rj.gov.br/regiment2.nsf/e975dc081da5ea8c032568f5006d4467']);
+//
+//		$this->scrapeDocument($document);
+
+		$document = Document::firstOrCreate(['name' => 'Constituição Estadual', 'base_url' => 'http://alerjln1.alerj.rj.gov.br/constest.nsf/1171c5bc55cc861b032568f50070cfb6']);
+
+		$this->scrapeDocument($document);
+	}
+
+	public function scrapeDocument($document)
+	{
+		$regiment = json_decode(file_get_contents($document->base_url.'?readviewentries&outputformat=json&Count=1000'), true);
 
 		$regiment = $regiment['viewentry'];
 
@@ -185,32 +197,30 @@ class Scraper {
 		{
 			$data = [];
 
+			$data['document_id'] = $document->id;
+
 			$data['position'] = $item['@position'];
 
 			$data['level'] = substr_count($data['position'], '.');
 
 			if (isset($item['@unid']))
 			{
-				$data['document_id'] = $item['@unid'];
+				$data['alerj_id'] = $item['@unid'];
 
-				$data['page'] = $this->scrapeRegimentPage($item['@unid']);
+				$data['page'] = $this->scrapeRegimentPage($document->base_url, $item['@unid']);
+			}
 
-				$data['title'] = $item['entrydata'][3]['text'][0];
-			}
-			else
-			{
-				$data['title'] = $item['entrydata'][0]['text'][0];
-			}
+			$data['title'] = $this->findDocumentText($item['entrydata']);
 
 			echo $data['title']."\n";
 
-			Regiment::create($data);
+			DocumentPage::create($data);
 		}
 	}
 
-	private function scrapeRegimentPage($item)
+	private function scrapeRegimentPage($base_url, $item)
 	{
-		$url = "http://alerjln1.alerj.rj.gov.br/regiment2.nsf/e975dc081da5ea8c032568f5006d4467/$item?OpenDocument";
+		$url = "$base_url/$item?OpenDocument";
 
 		$page = file_get_contents($url);
 
@@ -219,6 +229,19 @@ class Scraper {
 		$crawler = $crawler->filter('body');
 
 		return $crawler->html();
+	}
+
+	private function findDocumentText($entrydata)
+	{
+		foreach ($entrydata as $data)
+		{
+			if (isset($data['text']))
+			{
+				return $data['text'][0];
+			}
+		}
+
+		return null;
 	}
 
 }

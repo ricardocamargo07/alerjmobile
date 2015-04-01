@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Regiment as RegimentModel;
 use App\Http\Controllers\Controller;
 
-class Regiment extends Controller {
+class Documents extends Controller {
 
 	public function all()
 	{

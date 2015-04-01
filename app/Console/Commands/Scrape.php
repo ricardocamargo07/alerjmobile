@@ -40,13 +40,13 @@ class Scrape extends Command {
 	public function fire(Scraper $scraper)
 	{
 		DB::table('parties')->delete();
-		DB::table('regiment')->delete();
+		DB::table('documents')->delete();
 
 		$this->info('Scraping congressmen...');
 		$scraper->scrapeCongressmen();
 
 		$this->info('Scraping regiment...');
-		$scraper->scrapeRegiment();
+		$scraper->scrapeDocuments();
 	}
 
 	/**

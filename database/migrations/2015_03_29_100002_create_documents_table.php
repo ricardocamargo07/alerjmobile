@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRegimentTable extends Migration {
+class CreateDocumentsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,14 +12,11 @@ class CreateRegimentTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('regiment', function(Blueprint $table)
+		Schema::create('documents', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('position');
-			$table->integer('level');
-			$table->string('document_id')->nullable();
-			$table->string('title');
-			$table->text('page')->nullable();
+			$table->string('name');
+			$table->string('base_url');
 			$table->timestamps();
 		});
 	}
@@ -31,7 +28,7 @@ class CreateRegimentTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('regiment');
+		Schema::drop('documents');
 	}
 
 }
