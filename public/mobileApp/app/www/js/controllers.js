@@ -45,7 +45,8 @@ angular.module('starter.controllers', [])
             { title: 'Notícias', id: 'noticias' },
             { title: 'Alô, ALERJ!', id: 'alo' },
             { title: 'Comissões Permanentes', id: 'comissoes' },
-            { title: 'Regimento Interno', id: 'regiment' },
+            { title: 'Regimento Interno', id: 'documents/Regimento Interno' },
+            { title: 'Constituição Estadual', id: 'documents/Constituição Estadual' },
             { title: 'Diário Oficial', id: 'diario' }
         ];
     })
@@ -71,11 +72,12 @@ angular.module('starter.controllers', [])
             });
     })
 
-    .controller('RegimentController', function($scope, $http)
+    .controller('DocumentsController', function($scope, $http, $stateParams)
     {
-        $http.get('http://alerjapi.antoniocarlosribeiro.com/api/v1.0/regiment')
+        $http.get('http://alerjapi.antoniocarlosribeiro.com/api/v1.0/documentsPages/'+$stateParams.name)
             .then(function(res){
-                $scope.regiment = res.data;
+                console.log(res.data);
+                $scope.documents = res.data;
             });
 
         $scope.clearSearch = function() {
@@ -83,12 +85,12 @@ angular.module('starter.controllers', [])
         };
     })
 
-    .controller('RegimentDocumentController', function($scope, $http, $stateParams)
+    .controller('DocumentsPagesController', function($scope, $http, $stateParams)
     {
         console.log($stateParams);
-        $http.get('http://alerjapi.antoniocarlosribeiro.com/api/v1.0/regiment/'+$stateParams.document_id)
+        $http.get('http://alerjapi.antoniocarlosribeiro.com/api/v1.0/documentsPages/page/'+$stateParams.page_id)
             .then(function(res){
-                $scope.regiment = res.data;
+                $scope.page = res.data;
             });
     })
 

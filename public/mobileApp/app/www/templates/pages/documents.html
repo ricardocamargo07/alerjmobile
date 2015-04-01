@@ -12,12 +12,12 @@
         </div>
 
         <div class="list">
-            <div ng-repeat="item in regiment | filter: data.searchQuery">
-                <div ng-if="! item.document_id" class="item item-divider">
+            <div ng-repeat="item in documents | filter: data.searchQuery">
+                <div ng-if="! item.alerj_id" class="item item-divider">
                     <strong>{{item.title}}</strong>
                 </div>
 
-                <a class="item" ng-if="item.document_id" href="#/app/pages/regiment/{{item.id}}">
+                <a class="item" ng-if="item.alerj_id" href="#/app/pages/documents/pages/{{item.id}}">
                     {{item.title}}
                 </a>
             </div>

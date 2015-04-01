@@ -10,9 +10,9 @@ class DocumentPage extends Model {
 
 	protected $fillable = ['document_id', 'position', 'level', 'alerj_id', 'title', 'page'];
 
-	public function congressmen()
+	public function document()
 	{
-		return $this->hasMany('App\Congressman');
+		return $this->belongsTo('App\Document');
 	}
 
 }

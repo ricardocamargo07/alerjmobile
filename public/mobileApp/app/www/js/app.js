@@ -148,22 +148,22 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                 }
             })
 
-            .state('app.regiment', {
-                url: "/pages/regiment",
+            .state('app.documents', {
+                url: "/pages/documents/:name",
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/pages/regiment.html",
-                        controller: 'RegimentController'
+                        templateUrl: "templates/pages/documents.html",
+                        controller: 'DocumentsController'
                     }
                 }
             })
 
-            .state('app.regimentDocument', {
-                url: "/pages/regiment/:document_id",
+            .state('app.documentPages', {
+                url: "/pages/documents/pages/:page_id",
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/pages/regiment_document.html",
-                        controller: 'RegimentDocumentController'
+                        templateUrl: "templates/pages/document_page.html",
+                        controller: 'DocumentsPagesController'
                     }
                 }
             })

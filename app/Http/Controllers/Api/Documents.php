@@ -12,7 +12,15 @@ class Documents extends Controller {
 	{
 		$model = DocumentModel::where('name', $name)->first();
 
-		return $model->pages;
+		$page = new DocumentPage();
+
+		$columns = array_except(array_combine($page->getFillable(), $page->getFillable()), 'page');
+
+		return
+			DocumentPage::select(['id'] + $columns)
+				->where('document_id', $model->id)
+				->orderBy('id')
+				->get();
 	}
 
 	public function page($id)
