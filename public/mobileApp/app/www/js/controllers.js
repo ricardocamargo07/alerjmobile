@@ -78,6 +78,7 @@ angular.module('starter.controllers', [])
             .then(function(res){
                 console.log(res.data);
                 $scope.documents = res.data;
+                $scope.title = $stateParams.name;
             });
 
         $scope.clearSearch = function() {
