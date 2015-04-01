@@ -6,9 +6,9 @@ Route::group(['prefix' => 'api/v1.0', 'namespace' => 'Api'], function()
 
 	Route::get('congressman/profile/{id}', 'Congressmen@profile');
 
-	Route::get('regiment', 'Regiment@all');
+	Route::get('documentsPages/{name}', 'Documents@pages');
 
-	Route::get('regiment/{id}', 'Regiment@find');
+	Route::get('documentsPages/page/{page_id}', 'Documents@page');
 });
 
 Route::any('{any?}', function()

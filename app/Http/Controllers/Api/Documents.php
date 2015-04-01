@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Regiment as RegimentModel;
+use App\Document as DocumentModel;
+use App\DocumentPage;
 use App\Http\Controllers\Controller;
 
 class Documents extends Controller {
 
-	public function all()
+	public function pages($name)
 	{
-		return RegimentModel::orderBy('id')->get();
+		$model = DocumentModel::where('name', $name)->first();
+
+		return $model->pages;
 	}
 
-	public function find($id)
+	public function page($id)
 	{
-		return RegimentModel::find($id);
+		return DocumentPage::find($id);
 	}
 
 }
