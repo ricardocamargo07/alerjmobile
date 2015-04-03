@@ -16,18 +16,20 @@
         </ion-header-bar>
         <ion-content>
             <ion-list>
-                <ion-item nav-clear menu-close href="#/app/pages">
+                <a class="item item-icon-left"  href="#/app/pages">
+                    <i class="icon ion-ios-home"></i>
                     ALERJ Mobile
-                </ion-item>
-                <ion-item nav-clear menu-close ng-click="login()">
+                </a>
+
+                <a class="item item-icon-left" ng-click="login()">
+                    <i class="icon ion-unlocked"></i>
                     Login
-                </ion-item>
-                <ion-item nav-clear menu-close href="#/app/search">
+                </a>
+
+                <a class="item item-icon-left" href="#/app/search">
+                    <i class="icon ion-search"></i>
                     Buscar
-                </ion-item>
-                <ion-item nav-clear menu-close href="#/app/browse">
-                    Navegar
-                </ion-item>
+                </a>
             </ion-list>
         </ion-content>
     </ion-side-menu>
