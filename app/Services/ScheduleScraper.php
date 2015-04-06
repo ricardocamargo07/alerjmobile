@@ -10,6 +10,8 @@ class ScheduleScraper {
 
 	private $documentPageScraper;
 
+	private $scheduleUrl = 'http://alerjln1.alerj.rj.gov.br/ordemdia.nsf/c97e97dc1275d92503256bac007254ea';
+
 	public function __construct(HttpClient $client, DocumentPageScraper $documentPageScraper)
 	{
 		$this->client = $client;
@@ -19,7 +21,7 @@ class ScheduleScraper {
 
 	public function scrape()
 	{
-		$items = $this->client->getArray('http://alerjln1.alerj.rj.gov.br/ordemdia.nsf/c97e97dc1275d92503256bac007254ea?readviewentries&outputformat=json&Count=30');
+		$items = $this->client->getArray($this->scheduleUrl . '?readviewentries&outputformat=json&Count=30');
 
 		$items = $items['viewentry'];
 
@@ -65,10 +67,7 @@ class ScheduleScraper {
 
 	public function scrapeItem($item)
 	{
-		return $this->documentPageScraper->scrape(
-			'http://alerjln1.alerj.rj.gov.br/ordemdia.nsf/c97e97dc1275d92503256bac007254ea',
-			$item
-		);
+		return $this->documentPageScraper->scrape($this->scheduleUrl, $item);
 	}
 
 }
