@@ -13,6 +13,8 @@ Route::group(['prefix' => 'api/v1.0', 'namespace' => 'Api'], function()
 	Route::get('schedule', 'Schedule@all');
 
 	Route::get('schedule/{item}', 'Schedule@item');
+
+	Route::get('bills/{proposition}/votes', 'Bills@votes');
 });
 
 Route::any('{any?}', function()
