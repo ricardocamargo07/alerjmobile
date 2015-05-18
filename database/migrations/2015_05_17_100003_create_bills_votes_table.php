@@ -17,6 +17,7 @@ class CreateBillsVotesTable extends Migration {
 			$table->increments('id');
 			$table->integer('bill_id')->unsigned();
 			$table->integer('congressman_id')->unsigned();
+			$table->integer('plenary_session_id')->unsigned();
 			$table->boolean('vote');
 			$table->timestamps();
 
@@ -29,6 +30,12 @@ class CreateBillsVotesTable extends Migration {
 			$table->foreign('congressman_id')
 				->references('id')
 				->on('congressmen')
+				->onUpdate('cascade')
+				->onDelete('cascade');
+
+			$table->foreign('plenary_session_id')
+				->references('id')
+				->on('plenary_sessions')
 				->onUpdate('cascade')
 				->onDelete('cascade');
 		});

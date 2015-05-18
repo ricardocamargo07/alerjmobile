@@ -8,7 +8,7 @@ class BillVote extends Model {
 
 	protected $table = 'bills_votes';
 
-	protected $fillable = ['bill_id', 'congressman_id', 'vote'];
+	protected $fillable = ['bill_id', 'congressman_id', 'vote', 'plenary_session_id'];
 
 	public function bill()
 	{
@@ -18,6 +18,11 @@ class BillVote extends Model {
 	public function congressman()
 	{
 		return $this->belongsTo('App\Congressman');
+	}
+
+	public function plenarySession()
+	{
+		return $this->belongsTo('App\PlenarySession');
 	}
 
 }

@@ -47,7 +47,7 @@ class CreatePlenarySessionsPresentsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('plenary_sessions_presence');
+		Schema::drop('plenary_sessions_presents');
 	}
 
 }
