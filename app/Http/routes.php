@@ -1,5 +1,7 @@
 <?php
 
+use App\Bill;
+
 Route::group(['prefix' => 'api/v1.0', 'namespace' => 'Api'], function()
 {
 	Route::get('parties', 'Parties@all');

@@ -18,7 +18,7 @@ class CreateBillsVotesTable extends Migration {
 			$table->integer('bill_id')->unsigned();
 			$table->integer('congressman_id')->unsigned();
 			$table->integer('plenary_session_id')->unsigned();
-			$table->boolean('vote');
+			$table->string('vote');
 			$table->timestamps();
 
 			$table->foreign('bill_id')

@@ -32,8 +32,9 @@ class BillsSeeder extends Seeder {
 			// 2 = Yes
 			// 3 = No
 			// 4 = Restrained
+			// 5 = Didn't vote
 
-			$vote = rand(1,4);
+			$vote = rand(1,5);
 
 			if ($vote !== 1)
 			{
@@ -43,14 +44,14 @@ class BillsSeeder extends Seeder {
 				    'party_id' => $congressman->party_id,
 				]);
 
-				if ($vote !== 4)
+				if ($vote !== 5)
 				{
 					BillVote::create([
 						'bill_id' => $bill->id,
-					    'congressman_id' => $congressman->id,
-					    'plenary_session_id' => $plenary->id,
-					    'vote' => $vote == 2
-                    ]);
+						'congressman_id' => $congressman->id,
+						'plenary_session_id' => $plenary->id,
+						'vote' => $vote == 2 ? 'yes' : ($vote == 3 ? 'no' : 'refrained')
+					]);
 				}
 			}
 		}
