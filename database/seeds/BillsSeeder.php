@@ -53,11 +53,7 @@ class BillsSeeder extends Seeder {
                     ]);
 				}
 			}
-
-
 		}
-
-
 	}
 
 }
