@@ -15,9 +15,9 @@ abstract class Controller extends BaseController {
 	{
 		$response = response()->json($result);
 
-		if (Input::get('callback'))
+		if ($callback = Input::get('callback'))
 		{
-			$response->setCallback(Input::get('callback'));
+			$response->setCallback($callback);
 		}
 
 		return $response;
