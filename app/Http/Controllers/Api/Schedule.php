@@ -16,12 +16,12 @@ class Schedule extends Controller {
 
 	public function all()
 	{
-		return $this->schedule->scrape();
+		return $this->response($this->schedule->scrape());
 	}
 
 	public function item($item)
 	{
-		return $this->schedule->scrapeItem($item);
+		return $this->response($this->schedule->scrapeItem($item));
 	}
 
 }
