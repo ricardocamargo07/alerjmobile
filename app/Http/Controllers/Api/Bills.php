@@ -8,8 +8,8 @@ use Carbon\Carbon;
 use App\PlenarySession;
 use App\Http\Controllers\Controller;
 
-class Bills extends Controller {
-
+class Bills extends Controller
+{
 	public function votes($proposition)
 	{
 		$bill = Bill::first();
@@ -59,5 +59,4 @@ class Bills extends Controller {
 
 		return compact('votes', 'parties');
 	}
-
 }

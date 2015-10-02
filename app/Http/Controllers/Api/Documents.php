@@ -16,11 +16,12 @@ class Documents extends Controller {
 
 		$columns = array_except(array_combine($page->getFillable(), $page->getFillable()), 'page');
 
-		return
+		return $this->response(
 			DocumentPage::select(['id'] + $columns)
 				->where('document_id', $model->id)
 				->orderBy('id')
-				->get();
+				->get()
+		);
 	}
 
 	public function page($id)
