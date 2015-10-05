@@ -23,4 +23,12 @@ abstract class Controller extends BaseController {
 		return $response;
 	}
 
+	public function removeUneededLinks($text)
+	{
+		$part = '<a href="#TOPO"><img src="/icons/2-barrinha-topo.gif" border="0"></a></center>';
+
+		$text = str_replace($part, '', $text);
+
+		return $text;
+	}
 }

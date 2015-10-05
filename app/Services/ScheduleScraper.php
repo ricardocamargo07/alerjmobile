@@ -4,8 +4,8 @@ namespace App\Services;
 
 use Carbon\Carbon;
 
-class ScheduleScraper {
-
+class ScheduleScraper
+{
 	private $client;
 
 	private $documentPageScraper;
@@ -69,5 +69,4 @@ class ScheduleScraper {
 	{
 		return $this->documentPageScraper->scrape($this->scheduleUrl, $item);
 	}
-
 }

@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Services\ScheduleScraper;
 use App\Http\Controllers\Controller;
 
-class Schedule extends Controller {
-
+class Schedule extends Controller
+{
 	private $schedule;
 
 	public function __construct(ScheduleScraper $schedule)
@@ -21,7 +21,10 @@ class Schedule extends Controller {
 
 	public function item($item)
 	{
-		return $this->response($this->schedule->scrapeItem($item));
+		return $this->response(
+			$this->removeUneededLinks(
+				$this->schedule->scrapeItem($item)
+			)
+		);
 	}
-
 }
