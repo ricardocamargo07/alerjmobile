@@ -188,7 +188,7 @@ class Scraper {
 
 	public function scrapeDocuments()
 	{
-		$document = Document::firstOrCreate(['name' => 'Documento Interno', 'base_url' => 'http://alerjln1.alerj.rj.gov.br/regiment2.nsf/e975dc081da5ea8c032568f5006d4467']);
+		$document = Document::firstOrCreate(['name' => 'Regimento Interno', 'base_url' => 'http://alerjln1.alerj.rj.gov.br/regiment2.nsf/e975dc081da5ea8c032568f5006d4467']);
 
 		$this->scrapeDocument($document);
 
