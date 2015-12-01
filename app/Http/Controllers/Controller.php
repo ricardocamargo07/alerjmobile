@@ -31,4 +31,18 @@ abstract class Controller extends BaseController {
 
 		return $text;
 	}
+
+    public function respondWithError($message = '', $code = 200)
+    {
+        return $this->responseArray(false, 302, $message);
+    }
+
+    public function responseArray($success = true, $code = 200, $message = null)
+    {
+        return [
+            'message' => $message,
+            'success' => $success,
+            'code' => $code,
+        ];
+    }
 }

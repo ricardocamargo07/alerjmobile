@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Document as DocumentModel;
 use App\DocumentPage;
+use App\Document as DocumentModel;
 use App\Http\Controllers\Controller;
 
 class Documents extends Controller
 {
 	public function pages($name)
 	{
-		$model = DocumentModel::where('name', $name)->first();
+        if ( ! $model = DocumentModel::where('name', $name)->first())
+        {
+            return $this->respondWithError('documento não encontrado');
+        }
 
 		$page = new DocumentPage();
 
