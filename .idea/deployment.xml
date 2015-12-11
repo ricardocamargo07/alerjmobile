@@ -2,17 +2,17 @@
 <project version="4">
   <component name="PublishConfigData">
     <serverData>
-      <paths name="Marcos Salvador">
+      <paths name="Tracker">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
-      <paths name="Tracker">
+      <paths name="apiportal">
         <serverdata>
           <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/var/www/alerj/apiportal" />
           </mappings>
         </serverdata>
       </paths>

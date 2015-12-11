@@ -43,7 +43,7 @@ class ScheduleScraper
 			{
 				$appointment['title'] = $item['entrydata'][0]['text'][0].' de '.$year;
 			}
-			elseif (isset($item['@unid']))
+			elseif (isset($item['@unid']) && isset($item['entrydata'][0]['datetime'][0]))
 			{
 				$appointment['alerj_id'] = $item['@unid'];
 				$appointment['carbon'] = $this->toDateTime($item['entrydata'][0]['datetime'][0] . $item['entrydata'][1]['datetime'][0]);
