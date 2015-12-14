@@ -213,11 +213,15 @@ class Scraper {
 
 			$data['level'] = substr_count($data['position'], '.');
 
+            $data['has_contents'] = false;
+
 			if (isset($item['@unid']))
 			{
 				$data['alerj_id'] = $item['@unid'];
 
 				$data['page'] = $this->scrapeDocumentPage($document->base_url, $item['@unid']);
+
+                $data['has_contents'] = $this->pageHasContents($data['page']);
 			}
 
 			$data['title'] = $this->findDocumentText($item['entrydata']);
@@ -246,4 +250,22 @@ class Scraper {
 		return null;
 	}
 
+    private function pageHasContents($page)
+    {
+        $texto = strip_tags($page);
+
+        $pos = strpos($texto, $marker = 'Texto do Capítulo');
+
+        if ( ! $pos)
+        {
+            $pos = strpos($texto, $marker = 'Texto da Seção');
+        }
+
+        if ($pos !== false)
+        {
+            $texto = trim(substr($texto, $pos + strlen($marker)));
+        }
+
+        return strlen($texto) > 10;
+    }
 }

@@ -33,6 +33,6 @@ class Documents extends Controller
 
 		$document['page'] = $this->removeUneededLinks($document['page']);
 
-		return response()->json($document);
+        return response()->json($document);
 	}
 }
