@@ -213,7 +213,7 @@ class Scraper {
 
 			$data['level'] = substr_count($data['position'], '.');
 
-            $data['has_contents'] = false;
+            $data['has_content'] = false;
 
 			if (isset($item['@unid']))
 			{
@@ -221,7 +221,7 @@ class Scraper {
 
 				$data['page'] = $this->scrapeDocumentPage($document->base_url, $item['@unid']);
 
-                $data['has_contents'] = $this->pageHasContents($data['page']);
+                $data['has_content'] = $this->pageHasContents($data['page']);
 			}
 
 			$data['title'] = $this->findDocumentText($item['entrydata']);

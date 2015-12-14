@@ -8,7 +8,7 @@ class DocumentPage extends Model {
 
 	protected $table = 'documents_pages';
 
-	protected $fillable = ['document_id', 'position', 'level', 'alerj_id', 'title', 'page', 'has_contents'];
+	protected $fillable = ['document_id', 'position', 'level', 'alerj_id', 'title', 'page', 'has_content'];
 
 	public function document()
 	{
