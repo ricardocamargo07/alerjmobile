@@ -45,8 +45,24 @@ class ScheduleScraper
 			}
 			elseif (isset($item['@unid']) && isset($item['entrydata'][0]['datetime'][0]))
 			{
+                $date = $item['entrydata'][0]['datetime'][0];
+
+                if (isset($item['entrydata'][1]['datetime'][0]))
+                {
+                    $time = $item['entrydata'][1]['datetime'][0];
+                }
+                else
+                {
+                    $time = 'T000000,00';
+
+                    if ($item['entrydata'][1]['text'][0])
+                    {
+                        $time = $item['entrydata'][1]['text'][0];
+                    }
+                }
+
 				$appointment['alerj_id'] = $item['@unid'];
-				$appointment['carbon'] = $this->toDateTime($item['entrydata'][0]['datetime'][0] . $item['entrydata'][1]['datetime'][0]);
+				$appointment['carbon'] = $this->toDateTime($date . $time);
 				$appointment['title'] =  'Dia ' . (int) trim($appointment['carbon']->format('d')) . ' - ' . trim($item['entrydata'][3]['text'][0]) . ' (' . trim($appointment['carbon']->format('H\hi')) . ')';
 			}
 
