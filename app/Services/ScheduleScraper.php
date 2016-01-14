@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Cache;
 use App\Schedule;
 use Carbon\Carbon;
 use Illuminate\Support\Debug\Dumper;
@@ -36,6 +37,11 @@ class ScheduleScraper
 
     public function all()
     {
+        if ($schedule = Cache::get($cacheKey = 'allSchedule'))
+        {
+            return $schedule;
+        }
+
         $result = Schedule::orderBy('datetime', 'desc')->get()->toArray();
 
         foreach ($result as $index => $item)
@@ -43,15 +49,24 @@ class ScheduleScraper
             $result[$index]['carbon'] = $this->toDateTime($result[$index]['datetime']);
         }
 
+        Cache::put($cacheKey, $result, 1);
+
         return $result;
     }
 
     public function getDocument($item)
     {
+        if ($schedule = Cache::get($cacheKey = 'getDocument-'.$item))
+        {
+            return $schedule;
+        }
+
         if ( ! $schedule = Schedule::where('alerj_id', $item)->first())
         {
             return null;
         }
+
+        Cache::put($cacheKey, $schedule->document, 1);
 
         return $schedule->document;
     }
