@@ -34,7 +34,8 @@ class ScheduleScraper
         $schedule->save();
     }
 
-    public function all() {
+    public function all()
+    {
         $result = Schedule::orderBy('datetime', 'desc')->get()->toArray();
 
         foreach ($result as $index => $item)
@@ -43,6 +44,16 @@ class ScheduleScraper
         }
 
         return $result;
+    }
+
+    public function getDocument($item)
+    {
+        if ( ! $schedule = Schedule::where('alerj_id', $item)->first())
+        {
+            return null;
+        }
+
+        return $schedule->document;
     }
 
     public function scrape()

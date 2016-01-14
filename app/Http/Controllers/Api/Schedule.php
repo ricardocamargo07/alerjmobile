@@ -23,7 +23,7 @@ class Schedule extends Controller
 	{
 		return $this->response(
 			$this->removeUneededLinks(
-				$this->schedule->scrapeItem($item)
+				$this->schedule->getDocument($item)
 			)
 		);
 	}
