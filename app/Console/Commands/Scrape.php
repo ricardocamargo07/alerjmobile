@@ -6,8 +6,8 @@ use DB;
 use App\Services\Scraper;
 use Illuminate\Console\Command;
 
-class Scrape extends Command {
-
+class Scrape extends Command
+{
 	/**
 	 * The console command name.
 	 *
@@ -22,11 +22,10 @@ class Scrape extends Command {
 	 */
 	protected $description = 'Scrape the hell out of alerj.com.br.';
 
-	/**
-	 * Create a new command instance.
-	 *
-	 * @return void
-	 */
+    /**
+     * Create a new command instance.
+     *
+     */
 	public function __construct()
 	{
 		parent::__construct();
@@ -68,5 +67,4 @@ class Scrape extends Command {
 	{
 		return [];
 	}
-
 }

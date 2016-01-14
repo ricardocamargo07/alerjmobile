@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Schedule;
 use Carbon\Carbon;
+use Illuminate\Support\Debug\Dumper;
 
 class ScheduleScraper
 {
@@ -19,7 +21,31 @@ class ScheduleScraper
 		$this->documentPageScraper = $documentPageScraper;
 	}
 
-	public function scrape()
+    private function addToDatabase($entry) {
+        if (! $schedule = Schedule::where('alerj_id', $entry['alerj_id'])->first()) {
+            $schedule = new Schedule();
+        }
+
+        $schedule->alerj_id = $entry['alerj_id'];
+        $schedule->title = $entry['title'];
+        $schedule->document = $this->scrapeItem($entry['alerj_id']);
+        $schedule->datetime = $entry['datetime'];
+
+        $schedule->save();
+    }
+
+    public function all() {
+        $result = Schedule::orderBy('datetime', 'desc')->get()->toArray();
+
+        foreach ($result as $index => $item)
+        {
+            $result[$index]['carbon'] = $this->toDateTime($result[$index]['datetime']);
+        }
+
+        return $result;
+    }
+
+    public function scrape()
 	{
 		$items = $this->client->getArray($this->scheduleUrl . '?readviewentries&outputformat=json&Count=30');
 
@@ -62,8 +88,8 @@ class ScheduleScraper
                 }
 
 				$appointment['alerj_id'] = $item['@unid'];
-				$appointment['carbon'] = $this->toDateTime($date . $time);
-				$appointment['title'] =  'Dia ' . (int) trim($appointment['carbon']->format('d')) . ' - ' . trim($item['entrydata'][3]['text'][0]) . ' (' . trim($appointment['carbon']->format('H\hi')) . ')';
+				$appointment['datetime'] = $this->toDateTime($date . $time);
+				$appointment['title'] =  'Dia ' . (int) trim($appointment['datetime']->format('d')) . ' - ' . trim($item['entrydata'][3]['text'][0]) . ' (' . trim($appointment['datetime']->format('H\hi')) . ')';
 			}
 
 			$schedule[] = $appointment;
@@ -85,4 +111,29 @@ class ScheduleScraper
 	{
 		return $this->documentPageScraper->scrape($this->scheduleUrl, $item);
 	}
+
+    /**
+     * Scrape schedule and store in the database.
+     *
+     * @param \App\Console\Commands\Schedule $command
+     */
+    public function scrapeToDatabase($command = null)
+    {
+        foreach($this->scrape() as $entry)
+        {
+            if (isset($entry['alerj_id']))
+            {
+                $this->addToDatabase($entry);
+
+                if ($command)
+                {
+                    $command->comment($entry['alerj_id'] . ' - ' . $entry['title']);
+                }
+            }
+        }
+    }
+
+    public function dd() {
+        array_map(function($x) { (new Dumper)->dump($x); }, func_get_args());
+    }
 }

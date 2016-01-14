@@ -2,11 +2,10 @@
 
 namespace App\Services;
 
-use App\Services\HttpClient;
 use Symfony\Component\DomCrawler\Crawler;
 
-class DocumentPageScraper {
-
+class DocumentPageScraper
+{
 	private $client;
 
 	public function __construct(HttpClient $client)
@@ -14,7 +13,24 @@ class DocumentPageScraper {
 		$this->client = $client;
 	}
 
-	public function scrape($base_url, $item)
+    private function clearHtml($html) {
+        $decoded = '';
+
+        for ($i=0; $i < strlen($html); $i++)  {
+            $char = substr($html,$i,1);
+
+            if (ord($char) >= 32)
+            {
+                $decoded .= $char;
+            }
+        }
+
+        $decoded = trim($decoded);
+
+        return $decoded;
+    }
+
+    public function scrape($base_url, $item)
 	{
 		$url = "$base_url/$item?OpenDocument";
 
@@ -24,7 +40,6 @@ class DocumentPageScraper {
 
 		$crawler = $crawler->filter('body');
 
-		return $crawler->html();
+		return $this->clearHtml($crawler->html());
 	}
-
 }

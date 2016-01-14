@@ -16,7 +16,7 @@ class Schedule extends Controller
 
 	public function all()
 	{
-		return $this->response($this->schedule->scrape());
+		return $this->response($this->schedule->all());
 	}
 
 	public function item($item)

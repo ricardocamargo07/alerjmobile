@@ -39,7 +39,7 @@ class Schedule extends Command
 	public function fire(ScheduleScraper $scraper)
 	{
 		$this->info('Scraping schedule...');
-		$scraper->scrapeToDatabase();
+		$scraper->scrapeToDatabase($this);
 	}
 
 	/**
