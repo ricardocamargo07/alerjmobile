@@ -17,8 +17,8 @@ class CreateScheduleTable extends Migration
 			$table->increments('id');
 			$table->string('alerj_id')->index();
             $table->string('title');
+            $table->timestamp('datetime');
             $table->text('document');
-            $table->timestamp('date');
 			$table->timestamps();
 		});
 	}
