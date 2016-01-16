@@ -19,8 +19,6 @@ class Scraper {
 
 	public function __construct(HttpClient $client, DocumentPageScraper $documentPageScraper)
 	{
-		$this->driver = new WebDriver();
-
 		$this->client = $client;
 
 		$this->documentPageScraper = $documentPageScraper;
@@ -64,6 +62,8 @@ class Scraper {
 
 		foreach ($crawler as $row)
 		{
+            $this->startWebdriver();
+
 			$cells = $row -> getElementsByTagName('td');
 
 			foreach ($cells as $cell)
@@ -267,5 +267,9 @@ class Scraper {
         }
 
         return strlen($texto) > 10;
+    }
+
+    private function startWebdriver() {
+        $this->driver = new WebDriver();
     }
 }

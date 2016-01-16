@@ -25,8 +25,8 @@ class Kernel extends ConsoleKernel
 	 */
 	protected function schedule(Schedule $schedule)
 	{
+//        $schedule->command('alerj:congressmen')->hourly()->withoutOverlapping();
 		$schedule->command('alerj:scrape')->hourly()->withoutOverlapping();
-        $schedule->command('alerj:congressmen')->hourly()->withoutOverlapping();
         $schedule->command('alerj:schedule')->cron('* * * * * *')->withoutOverlapping();
 	}
 }
