@@ -6,21 +6,21 @@ use DB;
 use App\Services\Scraper;
 use Illuminate\Console\Command;
 
-class Scrape extends Command
+class Congressmen extends Command
 {
 	/**
 	 * The console command name.
 	 *
 	 * @var string
 	 */
-	protected $name = 'alerj:scrape';
+	protected $name = 'alerj:congressmen';
 
 	/**
 	 * The console command description.
 	 *
 	 * @var string
 	 */
-	protected $description = 'Scrape the hell out of alerj.com.br.';
+	protected $description = 'Scrape the schedule from alerj.gov.br.';
 
     /**
      * Create a new command instance.
@@ -31,22 +31,23 @@ class Scrape extends Command
 		parent::__construct();
 	}
 
-	/**
-	 * Execute the console command.
-	 *
-	 * @return mixed
-	 */
+    /**
+     * Execute the console command.
+     *
+     * @param Scraper $scraper
+     * @return mixed
+     */
 	public function fire(Scraper $scraper)
 	{
-		$this->info('Scraping regiment...');
+        $this->info('Scraping congressmen...');
 
         DB::transaction(function() use ($scraper)
         {
-            DB::table('documents')->delete();
+            DB::table('parties')->delete();
 
-            $scraper->scrapeDocuments();
+            $scraper->scrapeCongressmen();
         });
-	}
+    }
 
 	/**
 	 * Get the console command arguments.
