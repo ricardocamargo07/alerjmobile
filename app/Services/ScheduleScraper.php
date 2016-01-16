@@ -37,20 +37,29 @@ class ScheduleScraper
 
     public function all()
     {
-        if ($schedule = Cache::get($cacheKey = 'allSchedule'))
-        {
-            return $schedule;
-        }
+//        if ($schedule = Cache::get($cacheKey = 'allSchedule'))
+//        {
+//            return $schedule;
+//        }
 
         $result = Schedule::orderBy('datetime', 'desc')->get()->toArray();
+
+        $final = [["title" => "Dezembro de 2015"]];
 
         foreach ($result as $index => $item)
         {
             $result[$index]['carbon'] = $this->toDateTime($result[$index]['datetime']);
+
+            $final[] = [
+                'alerj_id' => $result[$index]['alerj_id'],
+                'carbon' => $result[$index]['carbon'],
+                'title' => $result[$index]['title'],
+            ];
         }
 
-        Cache::put($cacheKey, $result, 1);
+//        Cache::put($cacheKey, $result, 1);
 
+        return $final;
         return $result;
     }
 
