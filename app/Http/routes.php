@@ -8,11 +8,11 @@ Route::group(['prefix' => 'api/v1.0', 'namespace' => 'Api'], function()
 
 	Route::get('congressman/profile/{id}', 'Congressmen@profile');
 
-	Route::get('documentsPages/{name}/{includePage?}', 'Documents@pages');
-
 	Route::get('documentsPages/page/{page_id}', 'Documents@page');
 
-	Route::get('schedule', 'Schedule@all');
+    Route::get('documentsPages/{name}/{includePage?}', 'Documents@pages');
+
+    Route::get('schedule', 'Schedule@all');
 
 	Route::get('schedule/{item}', 'Schedule@item');
 
