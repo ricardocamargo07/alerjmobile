@@ -8,8 +8,17 @@ use App\Http\Controllers\Controller;
 
 class Documents extends Controller
 {
-	public function pages($name)
+    private function guessShowPage($showPage)
+    {
+        $showPage = strtolower($showPage);
+
+        return $showPage == 'yes' || $showPage == 'true' || $showPage == 'sim';
+    }
+
+    public function pages($name, $showPage = 'yes')
 	{
+        $showPage = $this->guessShowPage($showPage);
+
         if ( ! $model = DocumentModel::where('name', $name)->first())
         {
             return $this->respondWithError('documento não encontrado');
@@ -17,7 +26,9 @@ class Documents extends Controller
 
 		$page = new DocumentPage();
 
-		$columns = array_except(array_combine($page->getFillable(), $page->getFillable()), 'page');
+        $exceptFields = ! $showPage ? 'page' : 'allfieldswillbeshown';
+
+		$columns = array_except(array_combine($page->getFillable(), $page->getFillable()), $exceptFields);
 
 		return $this->response(
 			DocumentPage::select(['id'] + $columns)
