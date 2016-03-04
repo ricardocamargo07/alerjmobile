@@ -13,7 +13,7 @@ class DocumentPageScraper
 		$this->client = $client;
 	}
 
-    private function clearHtml($html) {
+    public function clearHtml($html) {
         $decoded = '';
 
         for ($i=0; $i < strlen($html); $i++)  {
@@ -27,7 +27,19 @@ class DocumentPageScraper
 
         $decoded = trim($decoded);
 
+        $decoded = $this->removeEmptyTable($decoded);
+
         return $decoded;
+    }
+
+    private function removeEmptyTable($decoded)
+    {
+        $string = '<table width="100%" border="1"><tr valign="top"><td width="100%"><img width="1" height="1" src="/icons/ecblank.gif" border="0" alt=""></td></tr></table>';
+
+        return
+            substr($decoded, 0, strpos($decoded, $string)) .
+            substr($decoded, strpos($decoded, $string) + strlen($string))
+        ;
     }
 
     public function scrape($base_url, $item)
