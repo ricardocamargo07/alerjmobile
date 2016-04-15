@@ -2,11 +2,11 @@
 
 namespace App\Services;
 
-class HttpClient {
-
+class HttpClient
+{
 	public function getArray($url)
 	{
-		return json_decode($this->getRaw($url), true);
+        return $this->toJson($this->getRaw($url));
 	}
 
 	public function getRaw($url)
@@ -14,4 +14,28 @@ class HttpClient {
 		return file_get_contents($url);
 	}
 
+    private function sanitizeJson($data)
+    {
+        $data = str_replace('=\>', ' - ', $data);
+
+        return $data;
+    }
+
+    /**
+     * @param $data
+     * @return mixed
+     */
+    private function toJson($data)
+    {
+        $result = json_decode($data, true);
+
+        if (! $result)
+        {
+            $result = json_decode($this->sanitizeJson($data));
+        }
+
+        dd($result);
+
+        return $result;
+    }
 }

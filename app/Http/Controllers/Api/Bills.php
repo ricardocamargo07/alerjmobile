@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Services\Scraper;
 use DB;
 use App\Bill;
 use Carbon\Carbon;
@@ -10,6 +11,20 @@ use App\Http\Controllers\Controller;
 
 class Bills extends Controller
 {
+    private $scraper;
+
+    private $billUrl = 'http://alerjln1.alerj.rj.gov.br/scpro1519.nsf/18c1dd68f96be3e7832566ec0018d833?readviewentries&outputformat=json&Count=100&Start=1';
+
+    public function __construct(Scraper $scraper)
+    {
+        $this->scraper = $scraper;
+    }
+
+    public function all()
+    {
+        return $this->scraper->scrapeBills($this->billUrl);
+    }
+
 	public function votes($proposition)
 	{
 		$bill = Bill::first();

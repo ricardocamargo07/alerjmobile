@@ -269,7 +269,15 @@ class Scraper {
         return strlen($texto) > 10;
     }
 
-    private function startWebdriver() {
+    private function startWebdriver()
+    {
         $this->driver = new WebDriver();
+    }
+
+    public function scrapeBills($url)
+    {
+        $bills = $this->client->getArray($url);
+
+        dd($bills);
     }
 }
