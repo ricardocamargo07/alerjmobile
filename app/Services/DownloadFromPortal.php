@@ -5,6 +5,8 @@ namespace App\Services;
 use Storage;
 use Exception;
 use Carbon\Carbon;
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Stream;
 
 class DownloadFromPortal extends Downloader
 {
@@ -12,14 +14,28 @@ class DownloadFromPortal extends Downloader
 
     private $downloader;
 
+    private $command;
+
     public function __construct()
     {
         $this->downloader = new Downloader();
+
+        $this->guzzle = new Client();
+    }
+
+    private function configureCommand($command)
+    {
+        $this->command = $command;
     }
 
     private function downloadFile($fileUrl, $baseDirName)
     {
-        $fileUrl = str_replace('http://www.portalalerj.rj.gov.br/', 'http://www.alerj.rj.gov.br/', $fileUrl);
+        $fileUrl = trim(str_replace('http://www.portalalerj.rj.gov.br/', 'http://www.alerj.rj.gov.br/', $fileUrl));
+
+        if (! starts_with($fileUrl, 'http'))
+        {
+            $fileUrl = 'http://'.$fileUrl;
+        }
 
         $fileName = $this->getBasedirFromDomain($fileUrl);
 
@@ -32,16 +48,35 @@ class DownloadFromPortal extends Downloader
 
         try
         {
-            $contents = file_get_contents($fileUrl);
+            $contents = $this->downloadFromUrl($fileUrl);
 
-            return Storage::disk('local')->put($fileName, $contents);
+            $file = Storage::disk('local')->put($fileName, $contents);
+
+            $this->info('Downloaded: '.$fileName);
+
+            return $file;
         }
         catch (Exception $exception)
         {
-
+            $this->error($exception->getMessage());
         }
 
         return null;
+    }
+
+    private function downloadFromUrl($fileUrl)
+    {
+        $tempFile = tmpfile();
+
+        $stream = new Stream($tempFile);
+
+        $this->guzzle->request('GET', $fileUrl, ['sink' => $stream]);
+
+        $contents = $stream->getContents();
+
+        fclose($tempFile);
+
+        return $contents;
     }
 
     public function downloadNews()
@@ -66,17 +101,17 @@ class DownloadFromPortal extends Downloader
         $this->savePhotos($news, $dirName);
     }
 
-    public function execute()
+    public function execute($command = null)
     {
+        $this->configureCommand($command);
+
         $this->downloadDeputies();
         $this->downloadNews();
         $this->downloadSchedule();
     }
 
     /**
-     * @param $deputies
-     * @param $lines
-     * @param $csv
+     * @param $items
      * @return mixed
      */
     private function extractCsv($items)
@@ -137,6 +172,22 @@ class DownloadFromPortal extends Downloader
         }
     }
 
+    private function info($string)
+    {
+        if ($this->command)
+        {
+            $this->command->info($string);
+        }
+    }
+
+    private function error($string)
+    {
+        if ($this->command)
+        {
+            $this->command->error($string);
+        }
+    }
+
     /**
      * @param $deputy
      * @param $lines
@@ -175,7 +226,11 @@ class DownloadFromPortal extends Downloader
      */
     private function saveJson($dirName)
     {
-        Storage::disk('local')->put($this->makeFileName($dirName, 'json', $dirName . '-' . $this->getFileDate() . '.json'), $this->downloader->toJson());
+        $fileName = $this->makeFileName($dirName, 'json', $dirName . '-' . $this->getFileDate() . '.json');
+
+        $this->info('JSON saved: '.$fileName);
+
+        Storage::disk('local')->put($fileName, $this->downloader->toJson());
     }
 
     private function savePhotos($lines, $baseDirName)

@@ -40,7 +40,7 @@ class Backup extends Command {
 	{
 		$this->info('Backuping...');
 
-        $downloader->execute();
+        $downloader->execute($this);
 
         $this->comment('Done.');
 	}
