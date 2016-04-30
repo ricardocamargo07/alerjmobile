@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
 		'App\Console\Commands\StressTest',
         'App\Console\Commands\Schedule',
         'App\Console\Commands\Congressmen',
+        'App\Console\Commands\Backup',
 	];
 
 	/**

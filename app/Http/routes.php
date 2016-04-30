@@ -1,17 +1,6 @@
 <?php
 
-use App\Services\DownloadFromPortal;
-
-Route::any('debug', function()
-{
-    $downloader = new DownloadFromPortal();
-
-    $downloader->downloadDeputies();
-    $downloader->downloadNews();
-    $downloader->downloadSchedule();
-
-    return '<h1>done</h1>';
-});
+Route::get('backup', 'Backup@execute');
 
 Route::group(['prefix' => 'api/v1.0', 'namespace' => 'Api'], function()
 {

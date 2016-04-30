@@ -66,6 +66,13 @@ class DownloadFromPortal extends Downloader
         $this->savePhotos($news, $dirName);
     }
 
+    public function execute()
+    {
+        $this->downloadDeputies();
+        $this->downloadNews();
+        $this->downloadSchedule();
+    }
+
     /**
      * @param $deputies
      * @param $lines
