@@ -1,5 +1,9 @@
 <?php
 
+Route::get('debug', function() {
+    Artisan::call('alerj:schedule');
+});
+
 Route::get('backup', 'Backup@execute');
 
 Route::group(['prefix' => 'api/v1.0', 'namespace' => 'Api'], function()

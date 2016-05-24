@@ -34,8 +34,6 @@ class HttpClient
             $result = json_decode($this->sanitizeJson($data));
         }
 
-        dd($result);
-
         return $result;
     }
 }
