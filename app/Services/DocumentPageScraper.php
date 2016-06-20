@@ -27,7 +27,7 @@ class DocumentPageScraper
 
         $decoded = trim($decoded);
 
-        $decoded = $this->removeEmptyTable($decoded);
+//        $decoded = $this->removeEmptyTable($decoded);
 
         return $decoded;
     }
