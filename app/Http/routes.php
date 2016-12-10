@@ -29,9 +29,7 @@ Route::group(['prefix' => 'api/v1.0', 'namespace' => 'Api'], function()
 
 Route::get('schedule', function(Discourse $discourse)
 {
-    Artisan::call('alerj:schedule');
-
-//    $discourse->scrape();
+    $discourse->scrapeToDatabase();
 
     return 'yes';
 });
