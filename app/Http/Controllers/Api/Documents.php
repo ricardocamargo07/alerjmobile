@@ -40,7 +40,11 @@ class Documents extends Controller
 
 	public function page($id)
 	{
-		$document = DocumentPage::find($id)->toArray();
+		if (! $document = DocumentPage::find($id)) {
+		    return [];
+        }
+
+        $document = $document->toArray();
 
 		$document['page'] = $this->removeUneededLinks($document['page']);
 
