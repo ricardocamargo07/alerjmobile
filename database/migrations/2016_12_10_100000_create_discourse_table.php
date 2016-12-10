@@ -16,8 +16,8 @@ class CreateDiscourseTable extends Migration
 		{
 			$table->increments('id');
 			$table->string('alerj_id')->index();
-            $table->string('title');
-            $table->integer('congressman_id')->unsigned();
+            $table->text('title');
+            $table->string('person', 4096);
             $table->string('session_type')->nullable(); // sessao ordinaria
             $table->string('expedient_type')->nullable(); // expediente final
             $table->string('document_type')->nullable(); // discurso
