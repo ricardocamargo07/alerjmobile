@@ -60,7 +60,7 @@ class Discourse
 
                     $discourse->save();
 
-                    $this->comment($discourse->alerj_id . ' - ' . $discourse->title);
+                    $this->comment($discourse->datetime->format('Y-m-d') . ' - ' . $discourse->alerj_id . ' - ' . $discourse->title);
                 }
             }
         }
