@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Scrapers;
 
 use Cache;
 use App\Schedule;
 use Carbon\Carbon;
+use App\Services\HttpClient;
 use Illuminate\Support\Debug\Dumper;
+use App\Services\Scrapers\DocumentPage as DocumentPageScraper;
 
-class ScheduleScraper
+class Discourse
 {
 	private $client;
 

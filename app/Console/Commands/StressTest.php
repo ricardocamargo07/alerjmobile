@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use DB;
 use Illuminate\Console\Command;
-use App\Services\ScheduleScraper;
+use App\Services\Scrapers\Schedule as ScheduleScraper;
 
 class StressTest extends Command {
 
@@ -32,11 +32,12 @@ class StressTest extends Command {
 		parent::__construct();
 	}
 
-	/**
-	 * Execute the console command.
-	 *
-	 * @return mixed
-	 */
+    /**
+     * Execute the console command.
+     *
+     * @param ScheduleScraper $scraper
+     * @return mixed
+     */
 	public function fire(ScheduleScraper $scraper)
 	{
 		$this->info('Stressing...');

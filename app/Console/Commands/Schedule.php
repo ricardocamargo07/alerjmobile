@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Services\ScheduleScraper;
+use App\Services\Scrapers\Schedule as ScheduleScraper;
 use Illuminate\Console\Command;
 
 class Schedule extends Command

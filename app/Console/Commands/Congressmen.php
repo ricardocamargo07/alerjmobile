@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use DB;
-use App\Services\Scraper;
+use App\Services\Scrapers\Scraper;
 use Illuminate\Console\Command;
 
 class Congressmen extends Command

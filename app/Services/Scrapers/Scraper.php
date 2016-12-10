@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Scrapers;
 
 use App\Party;
 use App\Document;
 use App\DocumentPage;
 use App\Congressman;
+use App\Services\HttpClient;
 use Symfony\Component\DomCrawler\Crawler;
+use App\Services\Scrapers\DocumentPage as DocumentPageScraper;
 
 class Scraper {
 

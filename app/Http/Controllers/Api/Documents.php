@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\DocumentPage;
 use App\Document as DocumentModel;
 use App\Http\Controllers\Controller;
-use App\Services\DocumentPageScraper;
-use App\Services\HttpClient;
 
 class Documents extends Controller
 {

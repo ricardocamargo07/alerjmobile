@@ -1,5 +1,7 @@
 <?php
 
+use App\Services\Scrapers\Discourse;
+
 Route::get('debug', function() {
     Artisan::call('alerj:schedule');
 });
@@ -23,6 +25,15 @@ Route::group(['prefix' => 'api/v1.0', 'namespace' => 'Api'], function()
 	Route::get('schedule/{item}', 'Schedule@item');
 
 	Route::get('bills/{proposition}/votes', 'Bills@votes');
+});
+
+Route::get('schedule', function(Discourse $discourse)
+{
+    Artisan::call('alerj:schedule');
+
+//    $discourse->scrape();
+
+    return 'yes';
 });
 
 Route::any('{any?}', function()

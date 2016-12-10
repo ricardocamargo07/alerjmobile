@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Scrapers;
 
+use App\Services\HttpClient;
 use Symfony\Component\DomCrawler\Crawler;
 
-class DocumentPageScraper
+class DocumentPage
 {
 	private $client;
 

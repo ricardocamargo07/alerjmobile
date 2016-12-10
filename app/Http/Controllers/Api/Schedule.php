@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Services\ScheduleScraper;
 use App\Http\Controllers\Controller;
+use App\Services\Scrapers\Scraper as ScheduleScraper;
 
 class Schedule extends Controller
 {
