@@ -23,13 +23,12 @@ class Schedule extends Controller
 
 	public function all()
 	{
-        $schedule = collect($this->scheduleScraper->all()->toArray());
+        $data = collect($this->scheduleScraper->all()->toArray())
+                    ->merge(collect($this->discourseScraper->all()->toArray()))
+                    ->sortByDesc('datetime')
+                    ->values();
 
-        $discourse = collect($this->discourseScraper->all()->toArray());
-
-        $data = $schedule->merge($discourse);
-
-		return $this->response($data->sortByDesc('datetime'));
+		return $this->response($data);
 	}
 
 	public function item($item)
