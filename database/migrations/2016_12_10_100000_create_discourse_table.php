@@ -20,7 +20,7 @@ class CreateDiscourseTable extends Migration
             $table->integer('congressman_id')->unsigned();
             $table->string('session_type')->nullable(); // sessao ordinaria
             $table->string('expedient_type')->nullable(); // expediente final
-            $table->string('item_type')->nullable(); // discurso
+            $table->string('document_type')->nullable(); // discurso
             $table->timestamp('datetime');
             $table->text('document');
 			$table->timestamps();
