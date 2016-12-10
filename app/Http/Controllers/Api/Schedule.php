@@ -25,7 +25,7 @@ class Schedule extends Controller
 	public function all()
 	{
 	    $discourse = collect($this->discourseScraper->all()->toArray())->map(function($item) {
-            $item['title'] = $item['title'].' (nch)';
+            $item['title'] = $item['title'].' (N/C)';
 
             return $item;
         });
