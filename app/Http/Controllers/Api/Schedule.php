@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use App\Services\Scrapers\Schedule as ScheduleScraper;
 use App\Services\Scrapers\Discourse as DiscourseScraper;
@@ -23,9 +24,20 @@ class Schedule extends Controller
 
 	public function all()
 	{
+	    $discourse = collect($this->discourseScraper->all()->toArray())->map(function($item) {
+            $item['title'] = $item['title'].' (23h59)';
+
+            return $item;
+        });
+
+	    $sorter = function($item) {
+	        $carbon = new Carbon($item['carbon']['date']);
+	        return $carbon->format('Ymd') . (isset($item['document_type']) ? 'A' : 'B') . $carbon->format('Hms');
+        };
+
         $data = collect($this->scheduleScraper->all()->toArray())
-                    ->merge(collect($this->discourseScraper->all()->toArray()))
-                    ->sortByDesc('datetime')
+                    ->merge($discourse)
+                    ->sortByDesc($sorter)
                     ->values();
 
 		return $this->response($data);
