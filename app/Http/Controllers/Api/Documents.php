@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\DocumentPage;
-use App\Document as DocumentModel;
 use App\Http\Controllers\Controller;
+use App\Data\Models\Document as DocumentModel;
+use App\Data\Models\DocumentPage as DocumentPageModel;
 
 class Documents extends Controller
 {
@@ -24,14 +24,14 @@ class Documents extends Controller
             return $this->respondWithError('documento não encontrado');
         }
 
-		$page = new DocumentPage();
+		$page = new DocumentPageModel();
 
         $exceptFields = ! $showPage ? 'page' : 'allfieldswillbeshown';
 
 		$columns = array_except(array_combine($page->getFillable(), $page->getFillable()), $exceptFields);
 
 		return $this->response(
-			DocumentPage::select(['id'] + $columns)
+			DocumentPageModel::select(['id'] + $columns)
 				->where('document_id', $model->id)
 				->orderBy('id')
 				->get()
@@ -40,7 +40,7 @@ class Documents extends Controller
 
 	public function page($id)
 	{
-		if (! $document = DocumentPage::find($id)) {
+		if (! $document = DocumentPageModel::find($id)) {
 		    return [];
         }
 
