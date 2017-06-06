@@ -2,11 +2,11 @@
 
 namespace App\Services\Scrapers;
 
-use App\Party;
-use App\Document;
-use App\DocumentPage;
-use App\Congressman;
+use App\Data\Models\Party;
 use App\Services\HttpClient;
+use App\Data\Models\Document;
+use App\Data\Models\DocumentPage;
+use App\Data\Models\Congressman;
 use Symfony\Component\DomCrawler\Crawler;
 use App\Services\Scrapers\DocumentPage as DocumentPageScraper;
 

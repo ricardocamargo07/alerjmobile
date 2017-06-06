@@ -5,8 +5,8 @@ namespace App\Services\Scrapers;
 use Cache;
 use Carbon\Carbon;
 use App\Services\HttpClient;
-use App\Schedule as ScheduleModel;
 use Illuminate\Support\Debug\Dumper;
+use App\Data\Models\Schedule as ScheduleModel;
 use App\Services\Scrapers\DocumentPage as DocumentPageScraper;
 
 class Schedule

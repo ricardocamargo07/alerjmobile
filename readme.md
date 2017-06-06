@@ -1,1 +1,0 @@
-## ALERJ Mobile App

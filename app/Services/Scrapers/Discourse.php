@@ -5,8 +5,8 @@ namespace App\Services\Scrapers;
 use Cache;
 use Carbon\Carbon;
 use App\Services\HttpClient;
-use App\Discourse as DiscourseModel;
 use Illuminate\Support\Debug\Dumper;
+use App\Data\Models\Discourse as DiscourseModel;
 use App\Services\Scrapers\DocumentPage as DocumentPageScraper;
 
 class Discourse

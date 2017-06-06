@@ -1,8 +1,9 @@
-<?php namespace App\Http\Controllers;
+<?php
 
-use App\Congressman;
+namespace App\Http\Controllers;
+
 use App\Party;
-use App\Services\Scraper;
+use App\Congressman;
 
 class WelcomeController extends Controller {
 

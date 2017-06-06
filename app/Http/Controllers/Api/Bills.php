@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Services\Scraper;
 use DB;
 use App\Bill;
 use Carbon\Carbon;
 use App\PlenarySession;
+use App\Services\Scrapers\Scraper;
 use App\Http\Controllers\Controller;
 
 class Bills extends Controller
