@@ -26,7 +26,7 @@ Route::group(['prefix' => 'api/v1.0', 'namespace' => 'Api'], function()
 
     Route::get('/bills/{proposition}/votes', 'Bills@votes');
 
-    Route::group(['prefix' => 'proderjapi'], function()
+    Route::group(['prefix' => 'proderj/api'], function()
     {
         Route::get('/{service}', 'Proderj@service');
     });
