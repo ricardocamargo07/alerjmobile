@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use Cache;
+use Route;
 use App\Congressman;
 use GuzzleHttp\Client as Guzzle;
 use Illuminate\Http\Request;
@@ -33,14 +34,19 @@ class Proderj extends Controller
 
     public function service($service)
     {
+        $parameters = Route::current()->parameters();
+
         $queryString = $this->request->getQueryString();
 
         $key = $this->makeCacheKey(
-            $url = static::ALERJ_SERVICE_BASE_URL."/{$service}?$queryString"
+            $url = static::ALERJ_SERVICE_BASE_URL."/".implode('/', $parameters)."?$queryString"
         );
 
         return Cache::remember($key, 10, function() use ($service, $url) {
-            return $this->readFromAlerjService($url);
+            return response(
+                $this->readFromAlerjService($url),
+                200
+            )->header('Content-Type', 'text/json');;
         });
 	}
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Services\Scrapers\Import;
 use Illuminate\Foundation\Inspiring;
 
 /*
@@ -16,3 +17,11 @@ use Illuminate\Foundation\Inspiring;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->describe('Display an inspiring quote');
+
+
+Artisan::command('app:import', function () {
+    app(Import::class)->execute(
+        'congressmen',
+        'http://apialerj.rj.gov.br/api/deputadoservice'
+    );
+})->describe('Import congressmen from Proderj');

@@ -3,7 +3,7 @@
 use App\Services\Scrapers\Discourse;
 
 Route::get('debug', function() {
-    Artisan::call('alerj:schedule');
+    Artisan::call('app:import');
 });
 
 Route::get('backup', 'Backup@execute');
@@ -28,7 +28,7 @@ Route::group(['prefix' => 'api/v1.0', 'namespace' => 'Api'], function()
 
     Route::group(['prefix' => 'proderj/api'], function()
     {
-        Route::get('/{service}', 'Proderj@service');
+        Route::get('/{service}/{param1?}/{param2?}/{param3?}/{param4?}', 'Proderj@service');
     });
 });
 
