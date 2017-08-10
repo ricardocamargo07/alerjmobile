@@ -32,17 +32,30 @@ class Proderj extends Controller
         return hash('sha256', $string);
     }
 
+    private function rebuildQueryString($string)
+    {
+        $items = collect(explode('&', $string))->reject(function($item) {
+            return starts_with('_=', $item);
+        });
+
+        // ->implode('&', $string);
+
+        return $string;
+    }
+
     public function service($service)
     {
         $parameters = Route::current()->parameters();
 
-        $queryString = $this->request->getQueryString();
+        $queryString = $this->rebuildQueryString($this->request->getQueryString());
 
         $key = $this->makeCacheKey(
             $url = static::ALERJ_SERVICE_BASE_URL."/".implode('/', $parameters)."?$queryString"
         );
 
         return Cache::remember($key, 10, function() use ($service, $url) {
+            info('CACHE MISS for '.$url);
+
             return response(
                 $this->readFromAlerjService($url),
                 200
