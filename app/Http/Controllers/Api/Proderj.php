@@ -34,13 +34,9 @@ class Proderj extends Controller
 
     private function rebuildQueryString($string)
     {
-        $items = collect(explode('&', $string))->reject(function($item) {
-            return starts_with('_=', $item);
-        });
-
-        // ->implode('&', $string);
-
-        return $string;
+        return collect(explode('&', $string))->reject(function($item) {
+            return starts_with($item, '_=');
+        })->implode('&', $string);
     }
 
     public function service($service)
