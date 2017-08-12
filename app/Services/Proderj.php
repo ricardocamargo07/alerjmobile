@@ -7,10 +7,9 @@ use Route;
 use App\Congressman;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client as Guzzle;
-use App\Http\Controllers\Controller;
 use App\Jobs\ReadFromExternalWebservice;
 
-class Proderj extends Controller
+class Proderj
 {
     const ALERJ_SERVICE_BASE_URL = 'http://apialerj.rj.gov.br/api';
 
@@ -67,7 +66,7 @@ class Proderj extends Controller
         return hash('sha256', $string);
     }
 
-    private function readAndCache($key, $service, $url)
+    public function readAndCache($key, $service, $url)
     {
         $callable = $this->getReaderClosure($service, $url);
 
