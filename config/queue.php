@@ -60,7 +60,7 @@ return [
         'redis' => [
             'driver' => 'redis',
             'connection' => 'default',
-            'queue' => dd(strtolower(camel_case(env('APP_NAME'))).'-default-queue'),
+            'queue' => strtolower(camel_case(env('APP_NAME'))).'-default-queue',
             'retry_after' => 90,
         ],
 
