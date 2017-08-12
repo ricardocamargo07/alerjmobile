@@ -73,7 +73,7 @@ class Proderj extends Controller
 
         $value = $callable();
 
-        Cache::put($key, $value);
+        Cache::forever($key, $value);
 
         return $value;
     }
