@@ -14,6 +14,12 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'tv' => [
+        'video' => [
+            'id' => env('TV_ALERJ_VIDEO_ID')
+        ]
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
