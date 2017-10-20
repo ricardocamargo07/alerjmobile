@@ -19,7 +19,6 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->describe('Display an inspiring quote');
 
-
 Artisan::command('app:import', function () {
     app(Import::class)->execute(
         'congressmen',

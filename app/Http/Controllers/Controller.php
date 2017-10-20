@@ -10,9 +10,9 @@ abstract class Controller extends BaseController
 {
 	use ValidatesRequests;
 
-	public function response($result)
+	public function response($result, $status = 200)
 	{
-		$response = response()->json($result);
+		$response = response(json_encode((array) $result), $status);
 
 		if ($callback = Input::get('callback'))
 		{
@@ -31,19 +31,25 @@ abstract class Controller extends BaseController
 		return $text;
 	}
 
-    public function respondWithError($message = '', $code = 200)
+    public function respondWithSuccess()
+    {
+        return $this->response($this->responseArray());
+    }
+
+    public function respondWithError($message = '', $code = 302)
     {
         return $this->response(
-            $this->responseArray(false, 302, $message)
+            $this->responseArray(false, $code, $message),
+            $code
         );
     }
 
     public function responseArray($success = true, $code = 200, $message = null)
     {
         return [
-            'message' => $message,
             'success' => $success,
             'code' => $code,
+            'message' => $message,
         ];
     }
 }
