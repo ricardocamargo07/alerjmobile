@@ -8,12 +8,19 @@ class Ldap
 {
     protected $ad;
 
-    public function __construct()
+    protected $message;
+
+    /**
+     * Message getter.
+     *
+     * @return mixed
+     */
+    public function getMessage()
     {
-        $this->instantiateLdap();
+        return $this->message;
     }
 
-    protected function instantiateLdap()
+    protected function instantiateLdap($username, $password)
     {
         // Construct new Adldap instance.
         $this->ad = new Adldap();
@@ -32,8 +39,8 @@ class Ldap
 
             // The account to use for querying / modifying LDAP records. This
             // does not need to be an actual admin account.
-            'admin_username'        => config('ldap.admin_username'),
-            'admin_password'        => config('ldap.admin_password'),
+            'admin_username'        => $username,
+            'admin_password'        => $password,
         ];
 
         // Add a connection provider to Adldap.
@@ -49,6 +56,16 @@ class Ldap
      */
     public function login($username, $password)
     {
-        return false;
+        $this->instantiateLdap($username, $password);
+
+        try {
+            $provider = $this->ad->connect();
+
+            return $provider->auth()->attempt($username, $password);
+        } catch (\Exception $exception) {
+            $this->message = $exception->getMessage();
+
+            return false;
+        }
     }
 }

@@ -10,15 +10,13 @@ return [
     // The domain controllers option is an array of your LDAP hosts. You can
     // use the either the host name or the IP address of your host.
     'domain_controllers'    => [
-        'al15.alerj.gov.br'
+        '10.17.90.14',
+        '10.17.90.15',
+        '10.17.90.24',
+        '10.17.90.25',
     ],
 
     // The base distinguished name of your domain.
     'base_dn' => 'dc=alerj,dc=gov,dc=br',
-
-    // The account to use for querying / modifying LDAP records. This
-    // does not need to be an actual admin account.
-    'admin_username' => 'admin',
-    'admin_password' => 'password',
 
 ];

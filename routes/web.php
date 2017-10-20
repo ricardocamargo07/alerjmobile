@@ -41,7 +41,4 @@ Route::get('schedule', function(Discourse $discourse)
     return 'yes';
 });
 
-Route::any('{any?}', function()
-{
-    return Redirect::to(env('SITE_MAIN'));
-});
+Route::get('/{any?}', 'HomeController@index');
