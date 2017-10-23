@@ -10,6 +10,15 @@ class Ldap
 
     protected $message;
 
+    private $provider;
+
+    private function connect($username, $password)
+    {
+        $this->instantiateLdap($username, $password);
+
+        $this->provider = $this->ad->connect();
+    }
+
     /**
      * Message getter.
      *
@@ -56,16 +65,19 @@ class Ldap
      */
     public function login($username, $password)
     {
-        $this->instantiateLdap($username, $password);
-
         try {
-            $provider = $this->ad->connect();
+            $this->connect($username, $password);
 
-            return $provider->auth()->attempt($username, $password);
+            return $this->provider->auth()->attempt($username, $password, true);
         } catch (\Exception $exception) {
             $this->message = $exception->getMessage();
 
             return false;
         }
+    }
+
+    public function findUser($username)
+    {
+        return $this->provider->search()->users()->find($username);
     }
 }

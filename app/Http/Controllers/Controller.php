@@ -31,9 +31,13 @@ abstract class Controller extends BaseController
 		return $text;
 	}
 
-    public function respondWithSuccess()
+    public function respondWithSuccess($data)
     {
-        return $this->response($this->responseArray());
+        return $this->response(
+            $this->responseArray(
+                true, 200, null, $data
+            )
+        );
     }
 
     public function respondWithError($message = '', $code = 302)
@@ -44,12 +48,13 @@ abstract class Controller extends BaseController
         );
     }
 
-    public function responseArray($success = true, $code = 200, $message = null)
+    public function responseArray($success = true, $code = 200, $message = null, $data = [])
     {
         return [
             'success' => $success,
             'code' => $code,
             'message' => $message,
+            'data' => $data,
         ];
     }
 }
