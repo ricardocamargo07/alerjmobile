@@ -33,17 +33,23 @@ class Ldap extends Controller
         );
     }
 
+    private function getUserData()
+    {
+        $data = $this->ldap->findUser($this->username);
+
+        return [
+            'name' => $data['displayname'],
+            'email' => $data['mail'],
+            'memberof' => $data['memberof'],
+            'description' => $data['description'],
+        ];
+    }
+
     public function login(Request $request)
     {
         return $this->attempt($request)
-            ? $this->respondWithSuccess($this->ldap->findUser($this->username))
+            ? $this->respondWithSuccess($this->getUserData())
             : $this->respondWithError('Attempt failed.', 401)
         ;
-    }
-
-    public function user(Request $request)
-    {
-        dump($this->attempt($request));
-        dump($this->ldap->findUser($request->get('username')));
     }
 }
