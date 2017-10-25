@@ -40,4 +40,10 @@ class Ldap extends Controller
             : $this->respondWithError('Attempt failed.', 401)
         ;
     }
+
+    public function user(Request $request)
+    {
+        dump($this->attempt($request));
+        dump($this->ldap->findUser($request->get('username')));
+    }
 }
