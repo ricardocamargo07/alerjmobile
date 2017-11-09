@@ -12,7 +12,7 @@ abstract class Controller extends BaseController
 
 	public function response($result, $status = 200)
 	{
-		$response = response(json_encode((array) $result), $status);
+		$response = response($result, $status);
 
 		if ($callback = Input::get('callback'))
 		{
