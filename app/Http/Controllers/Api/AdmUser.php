@@ -26,16 +26,34 @@ class AdmUser extends Controller
 
     public function permissions(AdmUserService $admUserService, Request $request)
     {
+        info('line 1');
         $key = $this->makeKey(($username = $request->get('username')).($system = $request->get('system')));
 
-        if ($cached = $this->getCached($key))
-        {
-            return $cached;
-        }
+        info('line 2');
+//        if ($cached = $this->getCached($key))
+//        {
+//            info('line 3');
+//            return $cached;
+//        }
 
-        $result = $admUserService->getPermissions($username, $system);
+        info('line 4');
+        info('---- type = $key '.gettype($key));
+        info($key);
+
+        $result = array_utf8_converter($admUserService->getPermissions($username, $system));
+
+        info('line 5');
+        info('---- type = $result '.gettype($result));
+        info($result);
 
         $this->cache($key, $result);
+
+        $result = json_encode($result);
+
+        info('line 6');
+        info('---- type = $result '.gettype($result));
+        info('---- json error = '.json_last_error_msg());
+        info($result);
 
         return $result;
     }
