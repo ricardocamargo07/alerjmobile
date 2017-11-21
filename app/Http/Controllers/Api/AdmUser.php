@@ -37,10 +37,17 @@ class AdmUser extends Controller
 //        }
 
         info('line 4');
-        info('---- type = $key '.gettype($key));
+        info("---- username: $username -- system: $system -- key: ".gettype($key));
+        info('---- type = $key == '.gettype($key));
         info($key);
 
-        $result = array_utf8_converter($admUserService->getPermissions($username, $system));
+        $result = $admUserService->getPermissions($username, $system);
+
+        info('line 4.5');
+        info('---- type = $key == '.gettype($result));
+        info($result);
+
+        $result = array_utf8_converter($result);
 
         info('line 5');
         info('---- type = $result '.gettype($result));
