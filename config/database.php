@@ -78,6 +78,17 @@ return [
             'prefix' => '',
         ],
 
+        'alerj-adm-user' => [
+            'driver' => 'sqlsrv',
+            'host' => env('DB_ALERJ_ADM_USER_HOST', 'localhost'),
+            'port' => env('DB_ALERJ_ADM_USER_PORT', '1433'),
+            'database' => env('DB_ALERJ_ADM_USER_DATABASE', 'forge'),
+            'username' => env('DB_ALERJ_ADM_USER_USERNAME', 'forge'),
+            'password' => env('DB_ALERJ_ADM_USER_PASSWORD', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+        ],
+
     ],
 
     /*

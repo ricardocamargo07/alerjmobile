@@ -2,10 +2,6 @@
 
 use App\Services\Scrapers\Discourse;
 
-Route::get('debug', function() {
-    Artisan::call('app:import');
-});
-
 Route::get('backup', 'Backup@execute');
 
 Route::group(['prefix' => 'api/v1.0', 'namespace' => 'Api'], function()

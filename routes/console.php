@@ -43,3 +43,7 @@ Artisan::command('queue:clear', function () {
     $this->info('Deleted jobs: '.$count);
 })->describe('Import congressmen from Proderj');
 
+
+Artisan::command('app:test', function () {
+
+})->describe('Import congressmen from Proderj');

@@ -22,6 +22,11 @@ class Handler extends ExceptionHandler
         \Illuminate\Validation\ValidationException::class,
     ];
 
+    private function handleException()
+    {
+        return response()->view('home.index');
+    }
+
     /**
      * Report or log an exception.
      *
@@ -44,6 +49,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($response = $this->handleException()) {
+            return $response;
+        }
+
         return parent::render($request, $exception);
     }
 
