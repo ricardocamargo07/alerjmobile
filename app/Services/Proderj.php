@@ -38,8 +38,12 @@ class Proderj
         if ($cached = Cache::get($key)) {
             dispatch(new ReadFromExternalWebservice($service, $key, $url));
 
+            info('CACHE HIT for ' . $url);
+
             return $cached;
         }
+
+        info('CACHE MISS for ' . $url);
 
         return $this->readAndCache($key, $service, $url);
     }
@@ -52,12 +56,10 @@ class Proderj
     protected function getReaderClosure($service, $url)
     {
         return function () use ($service, $url) {
-            info('CACHE MISS for ' . $url);
-
             return response(
                 $this->readFromAlerjService($url),
                 200
-            )->header('Content-Type', 'text/json');;
+            )->header('Content-Type', 'text/json');
         };
     }
 
