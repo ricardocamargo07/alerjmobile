@@ -12,9 +12,9 @@ class Ldap
 
     private $provider;
 
-    private function connect($username, $password)
+    private function connect($username = null, $password = null)
     {
-        $this->instantiateLdap($username, $password);
+        $this->instantiateLdap($username ?: config('ldap.user'), $password ?: config('ldap.password'));
 
         $this->provider = $this->ad->connect();
     }
@@ -78,6 +78,8 @@ class Ldap
 
     public function findUser($username)
     {
+        $this->connect();
+
         return $this->provider->search()->users()->find($username);
     }
 }

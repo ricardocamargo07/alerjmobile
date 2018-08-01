@@ -4,6 +4,10 @@ return [
 
     'route_prefix' => env('LDAP_ROUTE_PREFIX'),
 
+    'user' => env('LDAP_USER'),
+
+    'password' => env('LDAP_PASSWORD'),
+
     // Your account suffix, for example: jdoe@corp.acme.org
     'account_suffix'        => '@alerj.gov.br',
 

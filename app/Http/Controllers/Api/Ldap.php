@@ -14,28 +14,44 @@ class Ldap extends Controller
     private $ldap;
 
     private $username;
+
     private $password;
 
-    public function __construct(LdapService $ldap)
+    /**
+     * @var Request
+     */
+    private $request;
+
+    public function __construct(LdapService $ldap, Request $request)
     {
         $this->ldap = $ldap;
+
+        $this->request = $request;
     }
 
     /**
-     * @param Request $request
      * @return bool
      */
-    private function attempt(Request $request)
+    private function attempt()
     {
         return $this->ldap->login(
-            $this->username = $request->get('username'),
-            $this->password = $request->get('password')
+            $this->username = $this->request->get('username'),
+            $this->password = $this->request->get('password')
         );
+    }
+
+    public function user()
+    {
+        $this->username = $this->request->get('username');
+
+        return $this->getUserData();
     }
 
     private function getUserData()
     {
-        $data = $this->ldap->findUser($this->username);
+        if (!$data = $this->ldap->findUser($this->username)) {
+            abort(404);
+        }
 
         return [
             'name' => $data['displayname'],
@@ -45,11 +61,12 @@ class Ldap extends Controller
         ];
     }
 
-    public function login(Request $request)
+    public function login()
     {
-        return $this->attempt($request)
+        return $this->attempt()
             ? $this->respondWithSuccess($this->getUserData())
             : $this->respondWithError('Attempt failed.', 401)
         ;
     }
 }
+
