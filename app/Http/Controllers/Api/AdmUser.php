@@ -43,4 +43,24 @@ class AdmUser extends Controller
 
         return $result;
     }
+
+    public function profiles(AdmUserService $admUserService, Request $request)
+    {
+        $key = $this->makeKey(($username = $request->get('username')).($system = $request->get('system')));
+
+        if ($cached = $this->getCached($key))
+        {
+            return $cached;
+        }
+
+        $result = $admUserService->getProfiles($username, $system);
+
+        $result = array_utf8_converter($result);
+
+        $this->cache($key, $result);
+
+        $result = json_encode($result);
+
+        return $result;
+    }
 }
