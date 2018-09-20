@@ -26,7 +26,7 @@ class AdmUser extends Controller
 
     public function permissions(AdmUserService $admUserService, Request $request)
     {
-        $key = $this->makeKey(($username = $request->get('username')).($system = $request->get('system')));
+        $key = $this->makeKey('permissions-'.($username = $request->get('username')).($system = $request->get('system')));
 
         if ($cached = $this->getCached($key))
         {
@@ -46,7 +46,7 @@ class AdmUser extends Controller
 
     public function profiles(AdmUserService $admUserService, Request $request)
     {
-        $key = $this->makeKey(($username = $request->get('username')).($system = $request->get('system')));
+        $key = $this->makeKey('profiles-'.($username = $request->get('username')).($system = $request->get('system')));
 
         if ($cached = $this->getCached($key))
         {
