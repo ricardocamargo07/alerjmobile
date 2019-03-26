@@ -62,6 +62,8 @@ class HttpClient
 
     private function sanitizeJson($data)
     {
+        $data = str_replace("\n", '', $data);
+
         $data = str_replace('=\>', ' - ', $data);
 
         return $data;
@@ -73,13 +75,6 @@ class HttpClient
      */
     private function toJson($data)
     {
-        $result = json_decode($data, true);
-
-        if (! $result)
-        {
-            $result = json_decode($this->sanitizeJson($data));
-        }
-
-        return $result;
+        return json_decode($this->sanitizeJson($data), true);
     }
 }

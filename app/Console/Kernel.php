@@ -19,6 +19,7 @@ class Kernel extends ConsoleKernel
         'App\Console\Commands\Congressmen',
         'App\Console\Commands\Discourses',
         'App\Console\Commands\Backup',
+        'App\Console\Commands\BillProjects',
     ];
 
     /**

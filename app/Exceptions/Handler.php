@@ -24,7 +24,11 @@ class Handler extends ExceptionHandler
 
     private function handleException()
     {
-        return response()->view('home.index');
+        if (app()->environment('production')) {
+            return response()->view('home.index');
+        }
+
+        return false;
     }
 
     /**
@@ -63,8 +67,10 @@ class Handler extends ExceptionHandler
      * @param  \Illuminate\Auth\AuthenticationException  $exception
      * @return \Illuminate\Http\Response
      */
-    protected function unauthenticated($request, AuthenticationException $exception)
-    {
+    protected function unauthenticated(
+        $request,
+        AuthenticationException $exception
+    ) {
         if ($request->expectsJson()) {
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }

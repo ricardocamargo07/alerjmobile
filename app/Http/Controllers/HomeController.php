@@ -1,14 +1,16 @@
-<?php namespace App\Http\Controllers;
+<?php
+
+namespace App\Http\Controllers;
 
 class HomeController extends Controller
 {
-	/**
-	 * Show the application dashboard to the user.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		return 'you have no place here';
-	}
+    /**
+     * Show the application dashboard to the user.
+     *
+     * @return Response
+     */
+    public function index()
+    {
+        return 'you have no place here';
+    }
 }
