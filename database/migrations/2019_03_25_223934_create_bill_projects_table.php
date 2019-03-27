@@ -13,16 +13,17 @@ class CreateBillProjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('bill_projects', function(Blueprint $table)
-        {
+        Schema::create('bill_projects', function (Blueprint $table) {
             $table->increments('id');
             $table->string('code')->index();
-            $table->text('description');
             $table->date('date');
-            $table->string('url');
+            $table->string('authors', 2048);
             $table->string('year');
             $table->string('month');
             $table->string('number');
+            $table->text('description');
+            $table->string('url');
+            $table->string('site_url');
             $table->timestamps();
         });
     }

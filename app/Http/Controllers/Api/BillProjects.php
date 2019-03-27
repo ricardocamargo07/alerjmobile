@@ -11,15 +11,10 @@ class BillProjects extends Controller
     {
         $output = request()->get('output', 'csv');
 
-        $projects = BillProject::get([
-            'code',
-            'description',
-            'date',
-            'url',
-            'year',
-            'month',
-            'number',
-        ]);
+        $projects = BillProject::orderBy('year', 'desc')
+            ->orderBy('month', 'desc')
+            ->orderBy('number', 'desc')
+            ->get(BillProject::getColumns());
 
         if ($output === 'csv') {
             return $this->downloadCsv($projects);

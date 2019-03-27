@@ -6,15 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class BillProject extends Model
 {
-	protected $table = 'bill_projects';
+    protected $table = 'bill_projects';
 
-	protected $fillable = [
+    protected $fillable = [
         'code',
         'description',
         'date',
-        'url',
         'year',
         'month',
+        'authors',
         'number',
+        'url',
+        'site_url',
     ];
+
+    public static function getColumns()
+    {
+        return (new static())->getFillable();
+    }
 }
